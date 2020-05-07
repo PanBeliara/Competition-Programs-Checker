@@ -7,3 +7,13 @@ D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Pro
 D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.csproj.CoreCompileInputs.cache
 D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.dll
 D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.pdb
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\bin\Competition Programs Checker.dll.config
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\bin\Competition Programs Checker.dll
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\bin\Competition Programs Checker.pdb
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.csprojAssemblyReference.cache
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.csproj.CopyComplete
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.dll
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.pdb
+C:\Users\tworo\Source\Repos\Competition-Programs-Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.csproj.CoreCompileInputs.cache
