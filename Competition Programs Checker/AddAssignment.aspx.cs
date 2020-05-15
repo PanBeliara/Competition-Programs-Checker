@@ -66,7 +66,7 @@ namespace Competition_Programs_Checker
 
             Session["rows"] = rows;
 
-            Response.Redirect("AddAssignment.aspx"); //póki co kluczowe
+            Response.Redirect("AddAssignment.aspx"); //kluczowe
         }
 
         public void RemoveRow(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace Competition_Programs_Checker
                 {
                     this.rows.Remove(row);
                     Session["rows"] = this.rows;
-                    Response.Redirect("AddAssignment.aspx"); //póki co kluczowe
+                    Response.Redirect("AddAssignment.aspx"); //kluczowe
                 }
             }
         }
