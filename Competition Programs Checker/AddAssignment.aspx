@@ -20,6 +20,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <div class="container">
+
     <p>
         &nbsp;<asp:Label ID="Label1" runat="server" Text="Opis zadania [.pdf]"></asp:Label>
         :</p>
@@ -30,41 +32,25 @@
         ValidationExpression="(.+\.([Pp][Dd][Ff]))" ValidationGroup="mainGroup">*</asp:RegularExpressionValidator>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="FileUpload1" ErrorMessage="Wysłanie pliku z opisem zadania jest wymagane!" ValidationGroup="mainGroup">*</asp:RequiredFieldValidator>
     </p>
-    <p>
-    </p>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-            
-        </ContentTemplate>
-    </asp:UpdatePanel>
+        
     <p>
                 Testowe dane wejściowe:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Testowe dane wyjściowe:</p>
             <p>
-            <asp:TextBox ID="inputAddingTextBox" runat="server"></asp:TextBox>
+            <asp:TextBox ID="inputAddingTextBox" runat="server" TextMode="MultiLine"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="inputAddingTextBox" ErrorMessage="Dane wejściowe nie mogą być puste!" ValidationGroup="addingData">*</asp:RequiredFieldValidator>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="outputAddingTextBox" runat="server"></asp:TextBox>
+            <asp:TextBox ID="outputAddingTextBox" runat="server" TextMode="MultiLine"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="outputAddingTextBox" ErrorMessage="Dane wyjściowe nie mogą być puste!" ValidationGroup="addingData">*</asp:RequiredFieldValidator>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="addDataButton" runat="server" Text="Dodaj zestaw testowy" OnClick="addDataButton_Click" ValidationGroup="addingData" />
         </p>
         <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="addingData" />
-        <p>
-            <asp:ListBox ID="inputListBox" runat="server" Width="125px" AutoPostBack="false" ValidationGroup="mainGroup" OnSelectedIndexChanged="inputListBox_SelectedIndexChanged"></asp:ListBox>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:ListBox ID="outputListBox" runat="server" Width="129px" AutoPostBack="false" ValidationGroup="mainGroup" OnSelectedIndexChanged="outputListBox_SelectedIndexChanged"></asp:ListBox>
-            <asp:CustomValidator ID="ListBoxValidator" runat="server" ErrorMessage="Dane wejściowe muszą być podane!" OnServerValidate="ListBoxValidator_ServerValidate" ValidationGroup="mainGroup">*</asp:CustomValidator>
-            <asp:Label ID="test" runat="server" Text="Label"></asp:Label>
-        </p>
                 <p>
                     <asp:Table ID="Table1" runat="server" CssClass="data-table">
                     </asp:Table>
                 </p>
                 <p>
                     &nbsp;</p>
-                <p>
-                    <asp:Button ID="deleteRowsButton" runat="server" Enabled="False" OnClick="deleteRowsButton_Click" Text="Usuń zestaw testowy" />
-                </p>
     <p>
         <asp:Button ID="sendButton" runat="server" OnClick="sendButton_Click" Text="Wyślij" ValidationGroup="mainGroup" />
     </p>
@@ -73,4 +59,6 @@
     <p>
         &nbsp;</p>
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="mainGroup" />
-        </asp:Content>
+
+    </div>
+</asp:Content>

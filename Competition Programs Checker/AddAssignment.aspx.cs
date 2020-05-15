@@ -44,6 +44,13 @@ namespace Competition_Programs_Checker
         }
         protected void sendButton_Click(object sender, EventArgs e)
         {
+            /* TODO
+             * obsluga pobierania danych ze strony
+             * obsluga zapisywania danych na serwer
+             * jakiś update panel?
+            */
+            //wielowierszowość powinna działać
+            //powinna
 
         }
 
@@ -52,60 +59,33 @@ namespace Competition_Programs_Checker
             string input = inputAddingTextBox.Text;
             string output = outputAddingTextBox.Text;
 
-            rows.Add(new ItemsRow(this, input, output));
+            rows.Add(new ItemsRow(input, output));
 
             Session["rows"] = rows;
 
             Response.Redirect("AddAssignment.aspx");
         }
 
-        protected void ListBoxValidator_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            args.IsValid = outputListBox.Items.Count > 0 && inputListBox.Items.Count > 0;
-        }
-
-        protected void inputListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            outputListBox.SelectedIndex = inputListBox.SelectedIndex;
-            deleteRowsButton.Enabled = true;
-        }
-
-        protected void outputListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            inputListBox.SelectedIndex = outputListBox.SelectedIndex;
-            deleteRowsButton.Enabled = true;
-        }
-
-        protected void deleteRowsButton_Click(object sender, EventArgs e)
-        {
-            int id = inputListBox.SelectedIndex;
-            inputListBox.Items.RemoveAt(id);
-            outputListBox.Items.RemoveAt(id);
-
-            deleteRowsButton.Enabled = false;
-        }
         public void RemoveRow(object sender, EventArgs e)
         {
             Button button = (Button) sender;
             int id = int.Parse(button.CommandArgument);
-            test.Text = id.ToString();
+
             foreach(ItemsRow row in this.rows)
             {
                 if(row.ID == id)
                 {
                     this.rows.Remove(row);
                     Session["rows"] = this.rows;
-                    //FillTable();
                     Response.Redirect("AddAssignment.aspx");
-                    //break;
                 }
             }
         }
     }
+
     [Serializable]
     public class ItemsRow
     {
-        private AddAssignment parent;
         private static int rowID_identity = 0;
         private int rowID = rowID_identity;
 
@@ -125,10 +105,8 @@ namespace Competition_Programs_Checker
 
 
 
-        public ItemsRow(AddAssignment parent, string input, string output)
+        public ItemsRow(string input, string output)
         {
-            this.parent = parent;
-
             this.input.Text = input;
             this.input.Width = 100;
             this.input.Style.Add("word-wrap", "normal");
@@ -141,11 +119,6 @@ namespace Competition_Programs_Checker
 
             this.button.Text = "Usuń";
             this.button.CommandArgument = rowID.ToString();
-            //this.button.Click += new EventHandler(Test);
-            //this.button.Attributes.Add("onclick", "return false;");
-            
-            //this.button.UseSubmitBehavior = false;
-            //this.button.OnClientClick += new EventHandler(Test);
 
             this.input.CssClass = "data-label";
             this.output.CssClass = "data-label";
@@ -180,15 +153,11 @@ namespace Competition_Programs_Checker
         {
             this.button.Click += eventHandler;
         }
-        public void DontCauseValidation()
+        public void DontCauseValidation() //BARDZO WAŻNE NIE ZMIENIAĆ CHYBA ŻE ABSOLUTNA PEWNOŚĆ PLS ;_;
         {
             this.button.CausesValidation = false;
             this.button.ValidationGroup = "plsdontfire";
             this.button.UseSubmitBehavior = false;
-        }
-        public void Test(object sender, EventArgs e)
-        {
-            this.input.Text = "duuupa";
         }
         public TableRow Row
         {
