@@ -1,0 +1,22 @@
+﻿.data-table 
+{
+    table-layout: fixed;
+    width: 600px;
+}
+.data-row
+{
+    
+}
+.data-cell 
+{
+    width: 150px;
+    vertical-align: top;
+}
+.data-div
+{
+    height: auto !important;
+    margin-bottom: 50px;
+}
+.data-label {
+    display: table-cell
+}
