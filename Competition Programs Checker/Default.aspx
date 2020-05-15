@@ -14,7 +14,7 @@
                 Filler Text
             </p>
             <p>
-                <a class="btn btn-primary" href="~/Python">Go &raquo;</a>
+                <a runat="server" class="btn btn-primary" href="~/Python">Go &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
@@ -23,7 +23,7 @@
                 Filler Text 
             </p>
             <p>
-                <a class="btn btn-primary" href="~/C">Go &raquo;</a>
+                <a runat="server" class="btn btn-primary" href="~/C">Go &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
@@ -32,7 +32,7 @@
                 Filler Text
             </p>
             <p>
-                <a class="btn btn-primary" href="~/Java">Go &raquo;</a>
+                <a runat="server" class="btn btn-primary" href="~/Java">Go &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
@@ -41,7 +41,7 @@
                 Filler Text
             </p>
             <p>
-                <a class="btn btn-primary" href="/Javascript">Go &raquo;</a>
+                <a runat="server" class="btn btn-primary" href="~/Javascript">Go &raquo;</a>
             </p>
         </div>
     </div>
