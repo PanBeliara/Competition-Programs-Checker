@@ -103,6 +103,15 @@ namespace Competition_Programs_Checker {
         protected global::System.Web.UI.WebControls.Button addDataButton;
         
         /// <summary>
+        /// testDataValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator testDataValidator;
+        
+        /// <summary>
         /// ValidationSummary2 control.
         /// </summary>
         /// <remarks>

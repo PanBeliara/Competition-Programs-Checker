@@ -53,6 +53,7 @@
     <div class="row">
         <div class="col-md-4">
             <asp:Button ID="addDataButton" runat="server" Text="Dodaj zestaw testowy" OnClick="addDataButton_Click" ValidationGroup="addingData" />
+            <asp:CustomValidator ID="testDataValidator" runat="server" ErrorMessage="Musisz podać przynajmniej jeden zestaw testowy!" OnServerValidate="ValidateDataTable" ValidationGroup="mainGroup">*</asp:CustomValidator>
         </div>
     </div>
     <div class="row">

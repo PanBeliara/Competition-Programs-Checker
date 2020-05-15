@@ -26,7 +26,6 @@ namespace Competition_Programs_Checker
                 row.DontCauseValidation();
             }
         }
-    
         protected void Page_Load(object sender, EventArgs e)
         {
             FillTable();
@@ -44,14 +43,17 @@ namespace Competition_Programs_Checker
         }
         protected void sendButton_Click(object sender, EventArgs e)
         {
-            /* TODO
-             * obsluga pobierania danych ze strony
-             * obsluga zapisywania danych na serwer
-             * walidacja w oparciu o to
-             * jakiś update panel?
-            */
-            //wielowierszowość powinna działać
-            //powinna
+            HttpPostedFile file = FileUpload1.PostedFile;
+
+            foreach(ItemsRow row in this.rows)
+            {
+                string input = row.Input;
+                string output = row.Output;
+
+                //zapis do bazy danych
+
+                //jakiś redirect
+            }
 
         }
 
@@ -81,6 +83,11 @@ namespace Competition_Programs_Checker
                     Response.Redirect("AddAssignment.aspx"); //póki co kluczowe
                 }
             }
+        }
+
+        protected void ValidateDataTable(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = rows.Count > 0;
         }
     }
 
@@ -132,6 +139,14 @@ namespace Competition_Programs_Checker
         public int ID
         {
             get => rowID;
+        }
+        public string Input
+        {
+            get => input.Text;
+        }
+        public string Output
+        {
+            get => output.Text;
         }
 
 
