@@ -47,6 +47,7 @@ namespace Competition_Programs_Checker
             /* TODO
              * obsluga pobierania danych ze strony
              * obsluga zapisywania danych na serwer
+             * walidacja w oparciu o to
              * jakiś update panel?
             */
             //wielowierszowość powinna działać
