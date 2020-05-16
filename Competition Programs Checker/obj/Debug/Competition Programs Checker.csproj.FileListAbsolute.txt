@@ -1,0 +1,9 @@
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\bin\Competition Programs Checker.dll.config
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\bin\Competition Programs Checker.dll
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\bin\Competition Programs Checker.pdb
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.csprojResolveAssemblyReference.cache
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.csproj.CoreCompileInputs.cache
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.dll
+D:\Studia\6 semestr\Projekt grupowy\Competition Programs Checker\Competition Programs Checker\obj\Debug\Competition Programs Checker.pdb
