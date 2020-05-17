@@ -329,6 +329,8 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="Teacher\Add_Assignment.aspx" />
+    <Content Include="Teacher\Edit_Assignment.aspx" />
     <Content Include="Teacher\Teacher_Page.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -533,6 +535,20 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Teacher\Add_Assignment.aspx.cs">
+      <DependentUpon>Add_Assignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Teacher\Add_Assignment.aspx.designer.cs">
+      <DependentUpon>Add_Assignment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher\Edit_Assignment.aspx.cs">
+      <DependentUpon>Edit_Assignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Teacher\Edit_Assignment.aspx.designer.cs">
+      <DependentUpon>Edit_Assignment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Teacher\Teacher_Page.aspx.cs">
       <DependentUpon>Teacher_Page.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
