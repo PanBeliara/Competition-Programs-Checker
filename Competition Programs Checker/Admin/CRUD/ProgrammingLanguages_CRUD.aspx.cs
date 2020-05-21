@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Competition_Programs_Checker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

@@ -14,6 +14,9 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
 </head>
 <body>
     <form runat="server">
@@ -46,18 +49,6 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a runat="server" class="nav-link" href="~/Python">Python</a>
-                    </li>
-                    <li class="nav-item">
-                        <a runat="server" class="nav-link" href="~/C">C++</a>
-                    </li>
-                    <li class="nav-item">
-                        <a runat="server" class="nav-link" href="~/Java">Java</a>
-                    </li>
-                    <li class="nav-item">
-                        <a runat="server" class="nav-link" href="~/Javascript">Javascript</a>
-                    </li>
                     <asp:LoginView id="LoginView2" runat="server">
                             <RoleGroups>
                                 <asp:RoleGroup Roles="Admin">
