@@ -10,12 +10,16 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class PythonLogic
     {
-        public static void Run(TextBox codeTextBox, TextBox inputAddingTextBox, TextBox outputAddingTextBox) 
+        public static string Run(TextBox codeTextBox, TextBox inputAddingTextBox, TextBox outputAddingTextBox, TextBox functionTextBox) 
         {
             //Przypisanie zmiennych
             string code = codeTextBox.Text;
-            var input = inputAddingTextBox.Text;
-            var output = outputAddingTextBox.Text;
+            string input = inputAddingTextBox.Text;
+            string output = outputAddingTextBox.Text;
+            string func = functionTextBox.Text;
+
+            dynamic testFunction;
+            string result;
 
             //Utworzenie nowego obiektu typu ScriptEngine
             ScriptEngine engine = IronPython.Hosting.Python.CreateEngine();
@@ -30,10 +34,36 @@ namespace Competition_Programs_Checker.Logic
             source.Execute(scope);
 
             //Przypisanie funkcji testowej do zmiennej typu dynamic
-            dynamic testFunction = scope.GetVariable("test_func");
+            try
+            {
+                //Przypisanie funkcji testowej do zmiennej typu dynamic
+                testFunction = scope.GetVariable(func);
 
-            //Wywołanie funkcji testowej ze zmiennymi var1, var2 i przypisanie wyniku do zmiennej typu var
-            var result = testFunction(input);
+            }
+            catch(Exception e)
+            {
+                return "Podana funkcja nie istnieje";
+            }
+
+            try
+            {
+                //Wywołanie funkcji testowej ze zmienną input i przypisanie wyniku do zmiennej typu var
+                result = Convert.ToString(testFunction(input));
+            }
+            catch (Exception e)
+            {
+                return "Podano nieprawidłowe dane wejściowe";
+            }
+
+            if (result.Equals(output))
+            {
+                return "Prawidłowy wynik";
+            }
+            else
+            {
+                return "Błędny wynik";
+            }
+
         }
     }
 }

@@ -74,7 +74,8 @@ namespace Competition_Programs_Checker
             switch (DropDownList2.SelectedValue)
             {
                 case ("Python"):
-                    Logic.PythonLogic.Run(codeTextBox, inputTextBox, outputTextBox);
+                    string result = Logic.PythonLogic.Run(codeTextBox, inputTextBox, outputTextBox, functionName);
+                    resultTextBox.Text = result;
                     break;
                 case ("Java"):
                     Logic.JavaLogic.Run();
@@ -85,6 +86,26 @@ namespace Competition_Programs_Checker
                 case ("Javascript"):
                     Logic.JavascriptLogic.Run();
                     break;
+            }
+        }
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayPythonControls();
+        }
+
+        public void DisplayPythonControls()
+        {
+            Console.WriteLine(DropDownList2.SelectedValue);
+            if (DropDownList2.SelectedValue.Equals("Python"))
+            {
+                pythonLabel.Visible = true;
+                functionName.Visible = true;
+            }
+            else
+            {
+                pythonLabel.Visible = false;
+                functionName.Visible = false;
             }
         }
     }
