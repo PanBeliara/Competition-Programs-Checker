@@ -49,6 +49,10 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a runat="server" class="nav-link" href="~/Instructions"><b>Instrukcja</b></a>
+                    </li>
+
                     <asp:LoginView id="LoginView2" runat="server">
                             <RoleGroups>
                                 <asp:RoleGroup Roles="Admin">
