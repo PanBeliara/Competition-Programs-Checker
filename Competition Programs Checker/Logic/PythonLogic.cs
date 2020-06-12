@@ -18,6 +18,9 @@ namespace Competition_Programs_Checker.Logic
             string output = outputAddingTextBox.Text;
             string func = functionTextBox.Text;
 
+            //Zamiana inputów w postaci stringa na array
+            string[] inputArr = input.Split(',');
+
             dynamic testFunction;
             string result;
 
@@ -48,20 +51,20 @@ namespace Competition_Programs_Checker.Logic
             try
             {
                 //Wywołanie funkcji testowej ze zmienną input i przypisanie wyniku do zmiennej typu var
-                result = Convert.ToString(testFunction(input));
+                result = Convert.ToString(testFunction(inputArr));
             }
             catch (Exception e)
             {
-                return "Podano nieprawidłowe dane wejściowe";
+                return "Wystąpił błąd: " + e.Message;
             }
 
             if (result.Equals(output))
             {
-                return "Prawidłowy wynik";
+                return "Prawidłowy wynik: " + output + " = " + result;
             }
             else
             {
-                return "Błędny wynik";
+                return "Błędny wynik: " + output + " != " + result;
             }
 
         }
