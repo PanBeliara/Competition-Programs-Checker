@@ -17,13 +17,19 @@ namespace Competition_Programs_Checker.Logic
             string output = outputTextBox.Text;
             string className = JavaClassName.Text;
             Process process = new Process();
-            
+
             try
             {
+                //Pass the filepath and filename to the StreamWriter Constructor
 
-                //ścieżka gdzie chcemy zapisać plik
-                StreamWriter sw = new StreamWriter("D:\\Competition-Programs-Checker\\" + className+".java");
+                StreamWriter sw = new StreamWriter(HttpContext.Current.Server.MapPath("~/Logic/" + className + ".java"));
+
+                
+
+                //Write a line of text
                 sw.WriteLine(code);
+
+                //Close the file
                 sw.Close();
             }
             catch (Exception e)
@@ -32,21 +38,20 @@ namespace Competition_Programs_Checker.Logic
             }
             try
             {
-                //ścieżka do cmd.exe
                 process.StartInfo.FileName = "C:\\Windows\\System32\\cmd.exe";
-                //ścieżka do wcześniej zapisanego pliku.java
-                process.StartInfo.Arguments = "/c javac D:\\Competition-Programs-Checker\\"+className+".java";
+                
+                process.StartInfo.Arguments = "/c javac " + Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/" + className + ".java") + Convert.ToChar(34);
                 process.StartInfo.CreateNoWindow = false;
+                process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.UseShellExecute = false;
                 process.Start();
                 process.WaitForExit();
                 process.Close();
 
-                //ścieżka do java.exe, zwykle C:\\Program Files\\Java\\jdk-14.0.1\\bin\\java.exe
-                process.StartInfo.FileName = "C:\\Program Files\\Java\\jdk-14.0.1\\bin\\java.exe";
-
+                process.StartInfo.FileName = "C:\\Windows\\System32\\cmd.exe";
                 //Wskazanie pliku .class
-                process.StartInfo.Arguments = "-cp D:\\Competition-Programs-Checker " + className;
+                process.StartInfo.Arguments = "/c java -cp " + Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic") + Convert.ToChar(34)+" " + className;
+                Debug.WriteLine("/c java " + Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic") + Convert.ToChar(34) + " " + className);
                 process.StartInfo.CreateNoWindow = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
@@ -55,7 +60,7 @@ namespace Competition_Programs_Checker.Logic
                 process.Start();
                 process.StandardInput.WriteLine(input);
                 //Pobranie wyników pliku .class i przypisanie ich do zmiennej string
-                string strOutput = process.StandardOutput.ReadToEnd();
+                string strOutput = process.StandardOutput.ReadToEnd().Trim();
 
                 if (strOutput.Equals(output))
                 {
@@ -65,7 +70,7 @@ namespace Competition_Programs_Checker.Logic
                 {
                     return "Błędny wynik, poprawny wynik = " + strOutput + " Podany wynik = " + output;
                 }
-                    
+
             }
             catch (Exception e)
             {
