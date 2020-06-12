@@ -1,6 +1,7 @@
 ﻿using Competition_Programs_Checker.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -23,7 +24,8 @@ namespace Competition_Programs_Checker
                     resultTextBox.Text = result;
                     break;
                 case ("Java"):
-                    Logic.JavaLogic.Run();
+                    string resultJava = Logic.JavaLogic.Run(codeTextBox, inputTextBox, outputTextBox, JavaClassName);
+                    resultTextBox.Text = resultJava;
                     break;
                 case ("C++"):
                     Logic.CLogic.Run();
@@ -53,5 +55,30 @@ namespace Competition_Programs_Checker
                 functionName.Visible = false;
             }
         }
+        /* To powinno zadziałać jeżeli doda się update panel, próbowałem, nie działa a teraz chciałem wrzucić logikę javy że działa
+        public void DisplayControls()
+        {
+            switch (DropDownList2.SelectedValue)
+            {
+                case "Python":
+                    DropControls();
+                    pythonLabel.Visible = true;
+                    functionName.Visible = true;
+                    break;
+                case "Java":
+                    DropControls();
+                    JavaClassLabel.Visible = true;
+                    JavaClassName.Visible = true;
+                    break;
+            }
+        }
+        public void DropControls()
+        {
+            JavaClassLabel.Visible = false;
+            JavaClassName.Visible = false;
+            pythonLabel.Visible = false;
+            functionName.Visible = false;
+        }
+        */
     }
 }

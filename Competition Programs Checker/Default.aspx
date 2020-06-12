@@ -7,8 +7,13 @@
         <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="code" DataValueField="code"></asp:DropDownList>
         <br />
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [language_name] FROM [ProgrammingLanguages]"></asp:SqlDataSource>
-        Wybierz język:
-        <asp:DropDownList ID="DropDownList2" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="language_name"></asp:DropDownList>
+        &nbsp;<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                Wybierz język:
+                <asp:DropDownList ID="DropDownList2" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="language_name">
+                </asp:DropDownList>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
         <br />
         Kod programu:
@@ -18,6 +23,12 @@
 
         <asp:Label ID="pythonLabel" runat="server" Text="Nazwa funkcji do wywołania:"></asp:Label>
         <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="JavaClassLabel" runat="server" Text="JavaNazwa klasy: "></asp:Label>
+        <asp:TextBox ID="JavaClassName" runat="server"></asp:TextBox>
+
+
+        <br />
 
         <br />
 
