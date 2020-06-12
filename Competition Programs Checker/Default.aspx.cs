@@ -1,6 +1,7 @@
 ﻿using Competition_Programs_Checker.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -23,7 +24,8 @@ namespace Competition_Programs_Checker
                     resultTextBox.Text = result;
                     break;
                 case ("Java"):
-                    Logic.JavaLogic.Run();
+                    string resultJava = Logic.JavaLogic.Run(codeTextBox, inputTextBox, outputTextBox, JavaClassName);
+                    resultTextBox.Text = resultJava;
                     break;
                 case ("C++"):
                     Logic.CLogic.Run();
