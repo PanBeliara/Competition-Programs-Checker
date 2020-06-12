@@ -35,50 +35,5 @@ namespace Competition_Programs_Checker
                     break;
             }
         }
-
-        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DisplayPythonControls();
-        }
-
-        public void DisplayPythonControls()
-        {
-            Console.WriteLine(DropDownList2.SelectedValue);
-            if (DropDownList2.SelectedValue.Equals("Python"))
-            {
-                pythonLabel.Visible = true;
-                functionName.Visible = true;
-            }
-            else
-            {
-                pythonLabel.Visible = false;
-                functionName.Visible = false;
-            }
-        }
-        /* To powinno zadziałać jeżeli doda się update panel, próbowałem, nie działa a teraz chciałem wrzucić logikę javy że działa
-        public void DisplayControls()
-        {
-            switch (DropDownList2.SelectedValue)
-            {
-                case "Python":
-                    DropControls();
-                    pythonLabel.Visible = true;
-                    functionName.Visible = true;
-                    break;
-                case "Java":
-                    DropControls();
-                    JavaClassLabel.Visible = true;
-                    JavaClassName.Visible = true;
-                    break;
-            }
-        }
-        public void DropControls()
-        {
-            JavaClassLabel.Visible = false;
-            JavaClassName.Visible = false;
-            pythonLabel.Visible = false;
-            functionName.Visible = false;
-        }
-        */
     }
 }
