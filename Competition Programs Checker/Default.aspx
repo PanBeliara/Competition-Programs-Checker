@@ -8,18 +8,17 @@
         <br />
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [language_name] FROM [ProgrammingLanguages]"></asp:SqlDataSource>
         Wybierz język:
-        <asp:DropDownList ID="DropDownList2" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="language_name"></asp:DropDownList>
+        <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="language_name"></asp:DropDownList>
 
         <br />
         Kod programu:
         <br />
         <asp:TextBox CssClass="form-control" ID="codeTextBox" runat="server" TextMode="MultiLine"></asp:TextBox>
-        <br />
 
-        <asp:Label ID="pythonLabel" runat="server" Text="Nazwa funkcji do wywołania:"></asp:Label>
-        <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
-
-        <br />
+        <div id="pythonControl" style="display:none;">
+            <asp:Label ID="pythonLabel" runat="server" Text="Nazwa funkcji do wywołania:"></asp:Label>
+            <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
+        </div>
 
         <div>
             <h3 class="text-danger">Tymczasowe kontrolki dodane w celu sprawdzenia poprawności działania logiki sprawdzarki</h3>
@@ -36,5 +35,20 @@
 
         <br />
         <asp:Label ID="resultTextBox" runat="server"></asp:Label>
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#<%= DropDownList2.ClientID %>').change(function () {
+                    var x = document.getElementById("pythonControl");
+                    if ($(this).val() == 'Python') {
+                        x.style.display = "block";
+                    }
+                    else {
+                        x.style.display = "none";
+                    }
+                });
+            });
+        </script>
     </div>
 </asp:Content>

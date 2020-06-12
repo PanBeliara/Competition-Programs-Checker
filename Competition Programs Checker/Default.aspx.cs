@@ -33,25 +33,5 @@ namespace Competition_Programs_Checker
                     break;
             }
         }
-
-        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DisplayPythonControls();
-        }
-
-        public void DisplayPythonControls()
-        {
-            Console.WriteLine(DropDownList2.SelectedValue);
-            if (DropDownList2.SelectedValue.Equals("Python"))
-            {
-                pythonLabel.Visible = true;
-                functionName.Visible = true;
-            }
-            else
-            {
-                pythonLabel.Visible = false;
-                functionName.Visible = false;
-            }
-        }
     }
 }
