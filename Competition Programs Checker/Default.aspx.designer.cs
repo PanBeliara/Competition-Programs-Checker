@@ -60,6 +60,24 @@ namespace Competition_Programs_Checker
         protected global::System.Web.UI.WebControls.TextBox functionName;
 
         /// <summary>
+        /// JavaLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label JavaLabel;
+
+        /// <summary>
+        /// JavaClassName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox JavaClassName;
+
+        /// <summary>
         /// inputTextBox control.
         /// </summary>
         /// <remarks>

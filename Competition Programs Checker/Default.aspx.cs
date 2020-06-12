@@ -65,7 +65,7 @@ namespace Competition_Programs_Checker
             }
 
             DropDownList2.DataSource = allLanguages;
-            DropDownList2.SelectedValue = "Python";
+            DropDownList2.SelectedValue = "Java";
             DropDownList2.DataBind();
         }
 
@@ -78,7 +78,8 @@ namespace Competition_Programs_Checker
                     resultTextBox.Text = result;
                     break;
                 case ("Java"):
-                    Logic.JavaLogic.Run();
+                    string resultJava = Logic.JavaLogic.Run(codeTextBox, inputTextBox, outputTextBox, JavaClassName);
+                    resultTextBox.Text = resultJava;
                     break;
                 case ("C++"):
                     Logic.CLogic.Run();

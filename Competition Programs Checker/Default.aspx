@@ -17,6 +17,11 @@
         <asp:Label ID="pythonLabel" runat="server" Text="Nazwa funkcji do wywołania:"></asp:Label>
         <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
 
+        <br />
+        <asp:Label ID="JavaLabel" runat="server" Text="Java_Nazwa klasy: "></asp:Label>
+        <asp:TextBox ID="JavaClassName" runat="server"></asp:TextBox>
+        <br />
+
         <div>
             <h3 class="text-danger">Tymczasowe kontrolki dodane w celu sprawdzenia poprawności działania logiki sprawdzarki</h3>
             <br />
