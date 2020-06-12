@@ -24,7 +24,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
         {
             List<AspNetUser> allUsers = null;
 
-            using (User_Model_Connection dc = new User_Model_Connection())
+            using (DatabaseEntities dc = new DatabaseEntities())
             {
                 var users = (from a in dc.AspNetUsers
                              select new
@@ -67,7 +67,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
                     var fRow = myGridview.FooterRow;
                     TextBox txtEmail = (TextBox)fRow.FindControl("txtEmail");
                     TextBox txtPassword = (TextBox)fRow.FindControl("txtPassword");
-                    using (User_Model_Connection dc = new User_Model_Connection())
+                    using (DatabaseEntities dc = new DatabaseEntities())
                     {
 
                         /*
@@ -119,7 +119,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
             TextBox txtEmail = (TextBox)myGridview.Rows[e.RowIndex].FindControl("txtEmail");
             TextBox txtPassword = (TextBox)myGridview.Rows[e.RowIndex].FindControl("txtPassword");
             //Get Values (updated) and Save to database
-            using (User_Model_Connection dc = new User_Model_Connection())
+            using (DatabaseEntities dc = new DatabaseEntities())
             {
                 var v = dc.AspNetUsers.Where(a => a.Id.Equals(userID)).FirstOrDefault();
                 var backup = v;
@@ -144,7 +144,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
         {
             //int userID = (int)myGridview.DataKeys[e.RowIndex]["Id"];
             string userID = (string)myGridview.DataKeys[e.RowIndex]["Id"];
-            using (User_Model_Connection dc = new User_Model_Connection())
+            using (DatabaseEntities dc = new DatabaseEntities())
             {
                 var v = dc.AspNetUsers.Where(a => a.Id.Equals(userID)).FirstOrDefault();
                 if (v != null)

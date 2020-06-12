@@ -10,7 +10,6 @@ namespace Competition_Programs_Checker.Teacher
     public partial class Add_Assignment : System.Web.UI.Page
     {
         protected List<ItemsRow> rows = new List<ItemsRow>();
-        protected string language;
 
         private List<string> inputs = new List<string>();
         private List<string> outputs = new List<string>();
@@ -19,8 +18,6 @@ namespace Competition_Programs_Checker.Teacher
         {
             if (Session["rows"] != null)
                 rows = (List<ItemsRow>)Session["rows"];
-            if (Session["language"] != null)
-                language = (string)Session["language"];
 
             foreach (ItemsRow row in rows)
             {
@@ -30,8 +27,6 @@ namespace Competition_Programs_Checker.Teacher
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (language != null)
-                LanguageButton.SelectedValue = language;
             FillTable();
         }
 
@@ -69,7 +64,6 @@ namespace Competition_Programs_Checker.Teacher
             rows.Add(new ItemsRow(input, output));
 
             Session["rows"] = rows;
-            Session["language"] = LanguageButton.SelectedValue;
 
             Response.Redirect("Add_Assignment.aspx"); //kluczowe
         }

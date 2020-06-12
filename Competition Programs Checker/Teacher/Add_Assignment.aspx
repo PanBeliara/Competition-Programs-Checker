@@ -2,15 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="jumbotron">
-
-            <asp:RadioButtonList RepeatDirection="Horizontal" ID="LanguageButton" runat="server">
-                <asp:ListItem runat="server">Python</asp:ListItem>
-                <asp:ListItem runat="server">C++</asp:ListItem>
-                <asp:ListItem runat="server">Java</asp:ListItem>
-                <asp:ListItem runat="server">Javascript</asp:ListItem>
-            </asp:RadioButtonList>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="LanguageButton" ErrorMessage="Należy wybrać język zadania!" ValidationGroup="mainGroup">*</asp:RequiredFieldValidator>
-
             <div class="row">
                 <div class="col-md-4">
                     Testowe dane wejściowe:
