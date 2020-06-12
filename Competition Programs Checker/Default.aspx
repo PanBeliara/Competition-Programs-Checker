@@ -15,6 +15,11 @@
         <br />
         <asp:TextBox CssClass="form-control" ID="codeTextBox" runat="server" TextMode="MultiLine"></asp:TextBox>
 
+        <div id="javaControl" style="display:none;">
+            <asp:Label ID="JavaClassLabel" runat="server" Text="Nazwa klasy Javy: "></asp:Label>	
+            <asp:TextBox ID="JavaClassName" runat="server"></asp:TextBox>
+        </div>
+
         <div id="pythonControl" style="display:none;">
             <asp:Label ID="pythonLabel" runat="server" Text="Nazwa funkcji do wywołania:"></asp:Label>
             <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
@@ -41,11 +46,19 @@
             $(document).ready(function () {
                 $('#<%= DropDownList2.ClientID %>').change(function () {
                     var x = document.getElementById("pythonControl");
+                    var y = document.getElementById("javaControl");
                     if ($(this).val() == 'Python') {
                         x.style.display = "block";
                     }
                     else {
                         x.style.display = "none";
+                    }
+
+                    if ($(this).val() == 'Java') {
+                        y.style.display = "block";
+                    }
+                    else {
+                        y.style.display = "none";
                     }
                 });
             });
