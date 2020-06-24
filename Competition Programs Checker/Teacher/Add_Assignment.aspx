@@ -1,7 +1,58 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Add_Assignment.aspx.cs" Inherits="Competition_Programs_Checker.Teacher.Add_Assignment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
+        <asp:SqlDataSource ID="problem" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Problem]" InsertCommand="INSERT INTO Problem(code, title, author, assignment, is_active) 
+VALUES (@code, @title, @author, @assignment, @is_active);
+SELECT @inserted_id = SCOPE_IDENTITY();" OnInserted="GetLastUsedProblemId">
+            <InsertParameters>
+                <asp:ControlParameter ControlID="code" Name="code" PropertyName="Text" />
+                <asp:ControlParameter ControlID="title" Name="title" PropertyName="Text" />
+                <asp:Parameter Name="author" />
+                <asp:ControlParameter ControlID="FileUpload1" Name="assignment" PropertyName="FileBytes" />
+                <asp:Parameter DefaultValue="1" Name="is_active" />
+                <asp:Parameter Direction="Output" Name="inserted_id" Type="Int32" />
+            </InsertParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="programmingLanguages" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [id], [language_name] FROM [ProgrammingLanguages] ORDER BY [language_name]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="testRuns" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO TestRuns(problem_id, order_position, input, output) VALUES (@problem_id, @order_position, @input, @output)" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="SELECT MAX([order_position]) FROM [TestRuns]">
+            <InsertParameters>
+                <asp:Parameter Name="problem_id" Type="Int32" />
+                <asp:Parameter Name="order_position" Type="Int32" />
+                <asp:Parameter Name="input" />
+                <asp:Parameter Name="output" />
+            </InsertParameters>
+        </asp:SqlDataSource>
         <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-4">
+                    Język programowania:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <asp:DropDownList ID="language" runat="server" DataSourceID="programmingLanguages" DataTextField="language_name" DataValueField="id"></asp:DropDownList>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    Nazwa kodowa:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <asp:TextBox ID="code" runat="server" MaxLength="20"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Podaj nazwę kodową" Text="*" ControlToValidate="code" ValidationGroup="mainGroup"></asp:RequiredFieldValidator>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    Tytuł:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <asp:TextBox ID="title" runat="server" MaxLength="100"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Podaj tytuł" ControlToValidate="title" Text="*" ValidationGroup="mainGroup"></asp:RequiredFieldValidator>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-4">
                     Testowe dane wejściowe:
