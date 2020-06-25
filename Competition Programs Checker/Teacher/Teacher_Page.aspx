@@ -7,5 +7,10 @@
             <a class="btn btn-primary" href="/Teacher/Add_Assignment">Dodaj zadanie &raquo;</a>
             <a class="btn btn-primary" href="/Teacher/Edit_Assignment">Edytuj zadanie &raquo;</a>
         </div>
+        <div>
+            <p>Lista dodanych zadań</p>
+            <asp:SqlDataSource ID="Problems" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [id], [code], [title], [author] FROM [Problem]"></asp:SqlDataSource>
+            <asp:BulletedList ID="ProblemLinks" runat="server" DisplayMode="HyperLink"></asp:BulletedList>
+        </div>
     </div>
 </asp:Content>

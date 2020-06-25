@@ -874,6 +874,7 @@
     <Content Include="Teacher\Add_Assignment.aspx" />
     <Content Include="Teacher\Edit_Assignment.aspx" />
     <Content Include="Teacher\Teacher_Page.aspx" />
+    <Content Include="Teacher\View_Assignment.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -1131,12 +1132,20 @@
     <Compile Include="Teacher\Edit_Assignment.aspx.designer.cs">
       <DependentUpon>Edit_Assignment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Teacher\ItemsRow.cs" />
     <Compile Include="Teacher\Teacher_Page.aspx.cs">
       <DependentUpon>Teacher_Page.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Teacher\Teacher_Page.aspx.designer.cs">
       <DependentUpon>Teacher_Page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher\View_Assignment.aspx.cs">
+      <DependentUpon>View_Assignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Teacher\View_Assignment.aspx.designer.cs">
+      <DependentUpon>View_Assignment.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

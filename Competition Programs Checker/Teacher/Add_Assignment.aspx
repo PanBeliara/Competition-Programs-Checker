@@ -25,16 +25,6 @@ SELECT @inserted_id = SCOPE_IDENTITY();" OnInserted="GetLastUsedProblemId">
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-4">
-                    Język programowania:
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <asp:DropDownList ID="language" runat="server" DataSourceID="programmingLanguages" DataTextField="language_name" DataValueField="id"></asp:DropDownList>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
                     Nazwa kodowa:
                 </div>
             </div>
