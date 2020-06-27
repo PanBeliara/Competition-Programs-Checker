@@ -76,8 +76,8 @@ namespace Competition_Programs_Checker.Admin.CRUD
                         {
                             problem_id = Convert.ToInt32(txtProblemId.Text.Trim()),
                             order_position = Convert.ToInt32(txtOrderPosition.Text.Trim()),
-                            input_file = Encoding.ASCII.GetBytes(txtInputFile.Text.Trim()),
-                            output_file = Encoding.ASCII.GetBytes(txtOutputFile.Text.Trim())
+                            input = txtInputFile.Text.Trim(),
+                            output = txtOutputFile.Text.Trim()
                         });
 
                         PopulateTable();
@@ -128,8 +128,8 @@ namespace Competition_Programs_Checker.Admin.CRUD
                     v.problem_id = Convert.ToInt32(txtProblemId.Text.Trim());
                     v.problem_id = Convert.ToInt32(txtProblemId.Text.Trim());
                     v.order_position = Convert.ToInt32(txtOrderPosition.Text.Trim());
-                    v.input_file = Encoding.ASCII.GetBytes(txtInputFile.Text.Trim());
-                    v.output_file = Encoding.ASCII.GetBytes(txtOutputFile.Text.Trim());
+                    v.input = txtInputFile.Text.Trim();
+                    v.output = txtOutputFile.Text.Trim();
                 }
                 dc.SaveChanges();
                 myGridview.EditIndex = -1;

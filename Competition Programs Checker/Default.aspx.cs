@@ -20,7 +20,23 @@ namespace Competition_Programs_Checker
             switch (DropDownList2.SelectedValue)
             {
                 case ("Python"):
-                    string result = Logic.PythonLogic.Run(codeTextBox, inputTextBox, outputTextBox, functionName);
+                    List<TestRun> tests = getTests();
+                    string result = "";
+                    int good = 0;
+                    int overall = 0;
+
+                    foreach (TestRun test in tests)
+                    {
+                        var currResult = Logic.PythonLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, functionName.Text.Trim());
+                        if (currResult.Substring(0, 1).Equals("P"))
+                        {
+                            good++;
+                        }
+                        overall++;
+                        result = result + Environment.NewLine + currResult;
+                    }
+
+                    result = result + Environment.NewLine + "Wynik = " + good + "/" + overall + " " + (Convert.ToDouble(good) / Convert.ToDouble(overall))*100 + "%";
                     resultTextBox.Text = result;
                     break;
                 case ("Java"):
@@ -34,6 +50,22 @@ namespace Competition_Programs_Checker
                     Logic.JavascriptLogic.Run();
                     break;
             }
+        }
+
+        protected List<TestRun> getTests()
+        {
+            List<TestRun> tests = new List<TestRun>();
+            using (DatabaseEntities dc = new DatabaseEntities())
+            {
+                var problem = dc.Problems.Where(x => x.code == DropDownList1.SelectedValue).FirstOrDefault();
+                var Querabletests = dc.TestRuns.Where(x => x.problem_id == problem.id);
+                foreach (TestRun test in Querabletests)
+                {
+                    tests.Add(test);
+                }
+            }
+
+            return tests;
         }
     }
 }

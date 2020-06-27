@@ -44,10 +44,10 @@
                     </asp:TemplateField>
 
                     <asp:TemplateField>
-                        <HeaderTemplate>Input File</HeaderTemplate>
-                        <ItemTemplate><%#Eval("input_file") %></ItemTemplate>
+                        <HeaderTemplate>Input</HeaderTemplate>
+                        <ItemTemplate><%#Eval("input") %></ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtInputFile" runat="server" Text='<%#Bind("input_file") %>' />
+                            <asp:TextBox ID="txtInputFile" runat="server" Text='<%#Bind("input") %>' />
                             <asp:RequiredFieldValidator ID="inputFileEdit" runat="server" ForeColor="Red" ErrorMessage="*"
                                  Display="Dynamic" ValidationGroup="edit" ControlToValidate="txtInputFile">Required</asp:RequiredFieldValidator>
                         </EditItemTemplate>
@@ -59,10 +59,10 @@
                     </asp:TemplateField>
 
                     <asp:TemplateField>
-                        <HeaderTemplate>Output File</HeaderTemplate>
-                        <ItemTemplate><%#Eval("output_file") %></ItemTemplate>
+                        <HeaderTemplate>Output</HeaderTemplate>
+                        <ItemTemplate><%#Eval("output") %></ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtOutputFile" runat="server" Text='<%#Bind("output_file") %>' />
+                            <asp:TextBox ID="txtOutputFile" runat="server" Text='<%#Bind("output") %>' />
                             <asp:RequiredFieldValidator ID="outputFileEdit" runat="server" ForeColor="Red" ErrorMessage="*"
                                  Display="Dynamic" ValidationGroup="edit" ControlToValidate="txtOutputFile">Required</asp:RequiredFieldValidator>
                         </EditItemTemplate>

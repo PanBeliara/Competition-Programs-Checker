@@ -10,13 +10,8 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class PythonLogic
     {
-        public static string Run(TextBox codeTextBox, TextBox inputAddingTextBox, TextBox outputAddingTextBox, TextBox functionTextBox) 
+        public static string Run(string code, string input, string output, string func) 
         {
-            //Przypisanie zmiennych
-            string code = codeTextBox.Text;
-            string input = inputAddingTextBox.Text;
-            string output = outputAddingTextBox.Text;
-            string func = functionTextBox.Text;
 
             //Zamiana inputów w postaci stringa na array
             string[] inputArr = input.Split(',');

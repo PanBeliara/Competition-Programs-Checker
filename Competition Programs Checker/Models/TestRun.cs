@@ -17,8 +17,8 @@ namespace Competition_Programs_Checker.Models
         public int id { get; set; }
         public Nullable<int> problem_id { get; set; }
         public int order_position { get; set; }
-        public byte[] input_file { get; set; }
-        public byte[] output_file { get; set; }
+        public string input { get; set; }
+        public string output { get; set; }
     
         public virtual Problem Problem { get; set; }
     }
