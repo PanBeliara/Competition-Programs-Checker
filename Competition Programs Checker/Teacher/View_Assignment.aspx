@@ -53,7 +53,7 @@ WHERE [problem_id]=@problem_id">
         
             <div class="row">
                 <div class="col-md-4">
-                    <asp:Label ID="Label1" runat="server" Text="Opis zadania [.pdf]:"></asp:Label>
+                    <asp:Button ID="pdf_link" runat="server" Text="Pokaż treść zadania" OnClick="pdf_link_Click" OnClientClick="target ='_blank';" />
                 </div>
             </div>
         </div>

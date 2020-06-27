@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,6 +12,7 @@ namespace Competition_Programs_Checker.Teacher
     public partial class View_Assignment : System.Web.UI.Page
     {
         private string _problemId;
+        private byte[] pdfBytes;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -24,9 +26,12 @@ namespace Competition_Programs_Checker.Teacher
                 code.Text = row["code"].ToString();
                 title.Text = row["title"].ToString();
 
+                pdfBytes = (byte[])row["assignment"];
+
                 FillTable();
             }
             catch { }
+
         }
         private void FillTable()
         {
@@ -40,6 +45,13 @@ namespace Competition_Programs_Checker.Teacher
                 ItemsRow itemRow = new ItemsRow(dataRow["input"].ToString(), dataRow["output"].ToString(), true);
                 Table1.Rows.Add(itemRow.Row);
             }
+        }
+
+        protected void pdf_link_Click(object sender, EventArgs e)
+        {
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-length", pdfBytes.Length.ToString());
+            Response.BinaryWrite(pdfBytes);
         }
     }
 }
