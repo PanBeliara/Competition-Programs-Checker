@@ -12,6 +12,11 @@ namespace Competition_Programs_Checker.Logic
     {
         public static string Run(string code, string input, string output, string func) 
         {
+            //Jeśli input jest pusty przypisz do niego pusty literał
+            if(input == null)
+            {
+                input = " ";
+            }
 
             //Zamiana inputów w postaci stringa na array
             string[] inputArr = input.Split(',');
@@ -40,7 +45,7 @@ namespace Competition_Programs_Checker.Logic
             }
             catch(Exception e)
             {
-                return "Podana funkcja nie istnieje";
+                return "Wybrana funkcja nie istnieje";
             }
 
             try

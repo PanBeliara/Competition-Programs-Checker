@@ -13,6 +13,7 @@ namespace Competition_Programs_Checker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
         }
 
         protected void sendTask_Click(object sender, EventArgs e)
@@ -33,10 +34,10 @@ namespace Competition_Programs_Checker
                             good++;
                         }
                         overall++;
-                        result = result + Environment.NewLine + currResult;
+                        result = result + "<br />" + currResult;
                     }
 
-                    result = result + Environment.NewLine + "Wynik = " + good + "/" + overall + " " + (Convert.ToDouble(good) / Convert.ToDouble(overall))*100 + "%";
+                    result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall))*100 + "%";
                     resultTextBox.Text = result;
                     break;
                 case ("Java"):
