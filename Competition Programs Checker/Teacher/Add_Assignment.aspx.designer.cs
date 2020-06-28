@@ -22,15 +22,6 @@ namespace Competition_Programs_Checker.Teacher {
         protected global::System.Web.UI.WebControls.SqlDataSource problem;
         
         /// <summary>
-        /// programmingLanguages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource programmingLanguages;
-        
-        /// <summary>
         /// testRuns control.
         /// </summary>
         /// <remarks>

@@ -3,7 +3,11 @@
     <div class="container">
         <div class="jumbotron">
             <asp:SqlDataSource ID="Problem" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [id], [code], [title], [author], [assignment], [is_active], [best_scores_cache], [worst_best_score] FROM [Problem]
-WHERE [id] = @id">
+WHERE [id] = @id" DeleteCommand="DELETE FROM Problem
+WHERE [id]=@id">
+                <DeleteParameters>
+                    <asp:QueryStringParameter DefaultValue="0" Name="id" QueryStringField="id" />
+                </DeleteParameters>
                 <SelectParameters>
                     <asp:QueryStringParameter Name="id" QueryStringField="id" />
                 </SelectParameters>
@@ -55,6 +59,12 @@ WHERE [problem_id]=@problem_id">
                 <div class="col-md-4">
                     <asp:Button ID="pdf_link" runat="server" Text="Pokaż treść zadania" OnClick="pdf_link_Click" OnClientClick="target ='_blank';" />
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <asp:Button ID="edit" runat="server" Text="Edytuj" CssClass="btn btn-primary" OnClick="edit_Click" />
+                    <asp:Button ID="delete" runat="server" Text="Usuń" CssClass="btn btn-danger" OnClick="delete_Click" />
+                </div> 
             </div>
         </div>
     </div>

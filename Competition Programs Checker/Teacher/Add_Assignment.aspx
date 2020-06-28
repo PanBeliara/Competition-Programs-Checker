@@ -13,7 +13,6 @@ SELECT @inserted_id = SCOPE_IDENTITY();" OnInserted="GetLastUsedProblemId">
                 <asp:Parameter Direction="Output" Name="inserted_id" Type="Int32" />
             </InsertParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="programmingLanguages" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [id], [language_name] FROM [ProgrammingLanguages] ORDER BY [language_name]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="testRuns" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO TestRuns(problem_id, order_position, input, output) VALUES (@problem_id, @order_position, @input, @output)" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="SELECT MAX([order_position]) FROM [TestRuns]">
             <InsertParameters>
                 <asp:Parameter Name="problem_id" Type="Int32" />

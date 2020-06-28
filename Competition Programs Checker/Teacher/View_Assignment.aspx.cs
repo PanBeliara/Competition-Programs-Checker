@@ -53,5 +53,16 @@ namespace Competition_Programs_Checker.Teacher
             Response.AddHeader("content-length", pdfBytes.Length.ToString());
             Response.BinaryWrite(pdfBytes);
         }
+
+        protected void delete_Click(object sender, EventArgs e)
+        {
+            Problem.Delete();
+            Response.Redirect("Teacher_Page.aspx");
+        }
+
+        protected void edit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Edit_Assignment.aspx?id=" + _problemId);
+        }
     }
 }

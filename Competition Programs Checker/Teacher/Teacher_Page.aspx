@@ -5,7 +5,6 @@
 
         <div>
             <a class="btn btn-primary" href="/Teacher/Add_Assignment">Dodaj zadanie &raquo;</a>
-            <a class="btn btn-primary" href="/Teacher/Edit_Assignment">Edytuj zadanie &raquo;</a>
         </div>
         <div>
             <p>Lista dodanych zadań</p>
