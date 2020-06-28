@@ -77,13 +77,5 @@ namespace Competition_Programs_Checker.Admin
             UserRoleGridview.DataSource = getRoles();
             UserRoleGridview.DataBind();
         }
-        protected void AddTeacher_Click(object sender, EventArgs e)
-        {
-
-        }
-        protected void AddUser_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
