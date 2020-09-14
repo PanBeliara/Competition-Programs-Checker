@@ -44,24 +44,33 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-                $('#<%= DropDownList2.ClientID %>').change(function () {
-                    var x = document.getElementById("pythonControl");
-                    var y = document.getElementById("javaControl");
-                    if ($(this).val() == 'Python') {
-                        x.style.display = "block";
-                    }
-                    else {
-                        x.style.display = "none";
-                    }
+                checkDropdown();
 
-                    if ($(this).val() == 'Java') {
-                        y.style.display = "block";
-                    }
-                    else {
-                        y.style.display = "none";
-                    }
+                $('#<%= DropDownList2.ClientID %>').change(function () {
+                    checkDropdown();
                 });
             });
+
+            function checkDropdown() {
+                var java = document.getElementById("javaControl");
+                var python = document.getElementById("pythonControl");
+
+                java.style.display = "none";
+                python.style.display = "none";
+
+                switch ($('#<%= DropDownList2.ClientID %>').val()) {
+                    case 'C':
+                        break;
+                    case 'Java':
+                        java.style.display = "block";
+                        break;
+                    case 'JavaScript':
+                        break;
+                    case 'Python':
+                        python.style.display = "block";
+                        break;
+                }
+            }
         </script>
     </div>
 </asp:Content>
