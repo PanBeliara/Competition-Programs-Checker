@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Competition_Programs_Checker;
 
 namespace Competition_Programs_Checker.Teacher
 {
@@ -13,12 +16,13 @@ namespace Competition_Programs_Checker.Teacher
 
         private List<string> inputs = new List<string>();
         private List<string> outputs = new List<string>();
+        private int _lastUsedProblemId = 0;
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
             if (Session["rows"] != null)
                 rows = (List<ItemsRow>)Session["rows"];
-
+            
             foreach (ItemsRow row in rows)
             {
                 row.SetOnClickEvent(new EventHandler(RemoveRow));
@@ -27,6 +31,11 @@ namespace Competition_Programs_Checker.Teacher
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["code"] != null)
+                code.Text = Session["code"].ToString();
+            if (Session["title"] != null)
+                title.Text = Session["title"].ToString();
+
             FillTable();
         }
 
@@ -44,16 +53,34 @@ namespace Competition_Programs_Checker.Teacher
         {
             HttpPostedFile file = FileUpload1.PostedFile;
 
+            string author = User.Identity.GetUserId();
+            problem.InsertParameters["author"].DefaultValue = author;
+            problem.Insert();
+
             foreach (ItemsRow row in this.rows)
             {
                 string input = row.Input;
                 string output = row.Output;
 
-                //zapis do bazy danych
+                testRuns.InsertParameters["input"].DefaultValue = input;
+                testRuns.InsertParameters["output"].DefaultValue = output;
 
-                //jakiś redirect
+                testRuns.InsertParameters["problem_id"].DefaultValue = _lastUsedProblemId.ToString();
+
+                DataView view = (DataView)testRuns.Select(new DataSourceSelectArguments());
+                DataTable groupsTable = view.ToTable();
+                int maxPosition = int.Parse(groupsTable.Rows[0][0].ToString());
+                maxPosition++;
+                testRuns.InsertParameters["order_position"].DefaultValue = maxPosition.ToString();
+
+                testRuns.Insert();
             }
 
+            Response.Redirect("Teacher_Page.aspx");
+        }
+        protected void GetLastUsedProblemId(object sender, SqlDataSourceStatusEventArgs e)
+        {
+            _lastUsedProblemId = int.Parse(e.Command.Parameters["@inserted_id"].Value.ToString());
         }
 
         protected void addDataButton_Click(object sender, EventArgs e)
@@ -64,6 +91,8 @@ namespace Competition_Programs_Checker.Teacher
             rows.Add(new ItemsRow(input, output));
 
             Session["rows"] = rows;
+            Session["code"] = code.Text;
+            Session["title"] = title.Text;
 
             Response.Redirect("Add_Assignment.aspx"); //kluczowe
         }
@@ -79,6 +108,9 @@ namespace Competition_Programs_Checker.Teacher
                 {
                     this.rows.Remove(row);
                     Session["rows"] = this.rows;
+                    Session["code"] = code.Text;
+                    Session["title"] = title.Text;
+
                     Response.Redirect("Add_Assignment.aspx"); //kluczowe
                 }
             }
@@ -88,107 +120,9 @@ namespace Competition_Programs_Checker.Teacher
         {
             args.IsValid = rows.Count > 0;
         }
+
+
     }
 
-    [Serializable]
-    public class ItemsRow
-    {
-        private static int rowID_identity = 0;
-        private int rowID = rowID_identity;
-
-        Label input = new Label();
-        Label output = new Label();
-        Button button = new Button();
-
-        Panel div1 = new Panel();
-        Panel div2 = new Panel();
-        Panel div3 = new Panel();
-
-        TableCell td1 = new TableCell();
-        TableCell td2 = new TableCell();
-        TableCell td3 = new TableCell();
-
-        TableRow tr = new TableRow();
-
-        public ItemsRow(string input, string output)
-        {
-            this.input.Text = input;
-            this.output.Text = output;
-
-            AddProperties();
-            AddCssClasses();
-            LinkElements();
-
-            ItemsRow.rowID_identity++;
-        }
-        public void SetOnClickEvent(EventHandler eventHandler)
-        {
-            this.button.Click += eventHandler;
-        }
-        public void DontCauseValidation() //BARDZO WAŻNE NIE ZMIENIAĆ CHYBA ŻE ABSOLUTNA PEWNOŚĆ PLS ;_;
-        {
-            this.button.CausesValidation = false;
-            this.button.ValidationGroup = "plsdontfire";
-            this.button.UseSubmitBehavior = false;
-        }
-        public TableRow Row
-        {
-            get => tr;
-        }
-        public int ID
-        {
-            get => rowID;
-        }
-        public string Input
-        {
-            get => input.Text;
-        }
-        public string Output
-        {
-            get => output.Text;
-        }
-
-
-        private void AddProperties()
-        {
-            this.input.Style.Add("word-wrap", "normal");
-            this.input.Style.Add("word-break", "break-all");
-
-            this.output.Style.Add("word-wrap", "normal");
-            this.output.Style.Add("word-break", "break-all");
-
-            this.button.Text = "Usuń";
-            this.button.CommandArgument = rowID.ToString();
-        }
-        private void AddCssClasses()
-        {
-            this.input.CssClass = "data-label";
-            this.output.CssClass = "data-label";
-            this.button.CssClass = "data-label btn btn-danger";
-
-            this.div1.CssClass = "data-div h-auto d-inline-block d-inline p-2 bg-primary text-white";
-            this.div2.CssClass = "data-div h-auto d-inline-block d-inline p-2 bg-primary text-white";
-            this.div3.CssClass = "data-div h-auto d-inline-block d-inline";
-
-            this.td1.CssClass = "data-cell";
-            this.td2.CssClass = "data-cell";
-            this.td3.CssClass = "data-cell";
-
-            this.tr.CssClass = "data-row";
-        }
-        private void LinkElements()
-        {
-            this.div1.Controls.Add(this.input);
-            this.div2.Controls.Add(this.output);
-            this.div3.Controls.Add(this.button);
-
-            this.td1.Controls.Add(this.div1);
-            this.td2.Controls.Add(this.div2);
-            this.td3.Controls.Add(this.div3);
-
-            this.tr.Cells.Add(td1);
-            this.tr.Cells.Add(td2);
-            this.tr.Cells.Add(td3);
-        }
-    }
+    
 }

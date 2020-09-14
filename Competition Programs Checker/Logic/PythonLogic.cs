@@ -10,13 +10,13 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class PythonLogic
     {
-        public static string Run(TextBox codeTextBox, TextBox inputAddingTextBox, TextBox outputAddingTextBox, TextBox functionTextBox) 
+        public static string Run(string code, string input, string output, string func) 
         {
-            //Przypisanie zmiennych
-            string code = codeTextBox.Text;
-            string input = inputAddingTextBox.Text;
-            string output = outputAddingTextBox.Text;
-            string func = functionTextBox.Text;
+            //Jeśli input jest pusty przypisz do niego pusty literał
+            if(input == null)
+            {
+                input = " ";
+            }
 
             //Zamiana inputów w postaci stringa na array
             string[] inputArr = input.Split(',');
@@ -45,7 +45,7 @@ namespace Competition_Programs_Checker.Logic
             }
             catch(Exception e)
             {
-                return "Podana funkcja nie istnieje";
+                return "Wybrana funkcja nie istnieje";
             }
 
             try
