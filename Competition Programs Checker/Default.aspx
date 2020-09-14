@@ -9,6 +9,19 @@
         </asp:RadioButtonList>
 
         <br />
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Wybierz język:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [language_name] FROM [ProgrammingLanguages]"></asp:SqlDataSource>
+                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="language_name"></asp:DropDownList>
+                </div>
+            </div>
+        </div>
 
         <div class="container" id="tasks">
             <div class="row">
@@ -16,7 +29,7 @@
                     Wybierz zadanie:
                 </div>
                 <div class="col">
-                    Wybierz język:
+                    
                 </div>
             </div>
             <div class="row">
@@ -25,8 +38,7 @@
                     <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="code" DataValueField="id"></asp:DropDownList>
                 </div>
                 <div class="col">
-                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [language_name] FROM [ProgrammingLanguages]"></asp:SqlDataSource>
-                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="language_name"></asp:DropDownList>
+                    
                 </div>
             </div>
         </div>
