@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <br />
 
-    <input type="button" value="Python" onclick="slidePanel('<%= Panel1.ClientID %>')" />
+    <input type="button" value="Python" onclick="slidePanel('<%= Panel1.ClientID %>')" class="btn btn-secondary btn-lg btn-block" />
 
     <asp:Panel ID="Panel1" runat="server" style="display: none;">
         Python program checker converts every input variable into an array of string variables and passes that array into the python function you're trying to call, so:

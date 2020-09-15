@@ -10,12 +10,8 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class JavaLogic
     {
-        public static string Run(TextBox codeTextBox, TextBox inputTextBox, TextBox outputTextBox, TextBox JavaClassName)
+        public static string Run(string code, string input, string output, string className)
         {
-            string code = codeTextBox.Text;
-            string input = inputTextBox.Text;
-            string output = outputTextBox.Text;
-            string className = JavaClassName.Text;
             Process process = new Process();
 
             try

@@ -193,6 +193,7 @@
     <Content Include="Admin\Admin_Page.aspx" />
     <Content Include="Admin\CRUD\AspNetRoles_CRUD.aspx" />
     <Content Include="Admin\CRUD\AspNetUsers_CRUD.aspx" />
+    <Content Include="Admin\RolesAssignment.aspx" />
     <Content Include="Instructions.aspx" />
     <Content Include="Admin\CRUD\Problem_CRUD.aspx" />
     <Content Include="Admin\CRUD\ProgrammingLanguages_CRUD.aspx" />
@@ -992,6 +993,13 @@
     <Compile Include="Admin\Admin_Page.aspx.designer.cs">
       <DependentUpon>Admin_Page.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\RolesAssignment.aspx.cs">
+      <DependentUpon>RolesAssignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RolesAssignment.aspx.designer.cs">
+      <DependentUpon>RolesAssignment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Instructions.aspx.cs">
       <DependentUpon>Instructions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1100,6 +1108,7 @@
     <Compile Include="Models\ProgrammingLanguage.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\Solution.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
