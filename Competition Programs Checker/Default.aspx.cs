@@ -46,11 +46,33 @@ namespace Competition_Programs_Checker
                         break;
 
                     case ("Java"):
-                        string resultJava = Logic.JavaLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, JavaClassName.Text);
-                        resultTextBox.Text = resultJava;
+                        foreach (TestRun test in tests)
+                        {
+                            var currResult = Logic.JavaLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, JavaClassName.Text.Trim());
+                            if (currResult.Substring(0, 1).Equals("P"))
+                            {
+                                good++;
+                            }
+                            overall++;
+                            result = result + "<br />" + currResult;
+                        }
+                        result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
+                        resultTextBox.Text = result;
                         break;
-                    case ("C++"):
-                        Logic.CLogic.Run();
+
+                    case ("C"):
+                        foreach (TestRun test in tests)
+                        {
+                            var currResult = Logic.CLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, CFileName.Text.Trim());
+                            if (currResult.Substring(0, 1).Equals("P"))
+                            {
+                                good++;
+                            }
+                            overall++;
+                            result = result + "<br />" + currResult;
+                        }
+                        result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
+                        resultTextBox.Text = result;
                         break;
                     case ("Javascript"):
                         Logic.JavascriptLogic.Run();
@@ -70,8 +92,9 @@ namespace Competition_Programs_Checker
                         string resultJava = Logic.JavaLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, JavaClassName.Text);
                         resultTextBox.Text = resultJava;
                         break;
-                    case ("C++"):
-                        Logic.CLogic.Run();
+                    case ("C"):
+                        string resultC = Logic.CLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, CFileName.Text);
+                        resultTextBox.Text = resultC;
                         break;
                     case ("Javascript"):
                         Logic.JavascriptLogic.Run();

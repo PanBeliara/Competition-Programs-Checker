@@ -105,6 +105,24 @@ namespace Competition_Programs_Checker
         protected global::System.Web.UI.WebControls.TextBox JavaClassName;
 
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// CFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CFileName;
+
+        /// <summary>
         /// pythonLabel control.
         /// </summary>
         /// <remarks>

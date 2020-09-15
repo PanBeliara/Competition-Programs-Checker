@@ -72,6 +72,11 @@
             <asp:TextBox ID="JavaClassName" runat="server"></asp:TextBox>
         </div>
 
+        <div id="CControl" style="display:none;">
+            <asp:Label ID="Label1" runat="server" Text="Nazwa pliku C++: "></asp:Label>	
+            <asp:TextBox ID="CFileName" runat="server"></asp:TextBox>
+        </div>
+
         <div id="pythonControl" style="display:none;">
             <asp:Label ID="pythonLabel" runat="server" Text="Nazwa funkcji do wywołania:"></asp:Label>
             <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
@@ -101,12 +106,15 @@
             function checkLanguageDropdown() {
                 var java = document.getElementById("javaControl");
                 var python = document.getElementById("pythonControl");
+                var C = document.getElementById("CControl");
 
                 java.style.display = "none";
                 python.style.display = "none";
+                C.style.display = "none";
 
                 switch ($('#<%= DropDownList2.ClientID %>').val()) {
                     case 'C':
+                        C.style.display = "block";
                         break;
                     case 'Java':
                         java.style.display = "block";
