@@ -10,7 +10,7 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class PythonLogic
     {
-        public static string Run(string code, string input, string output, string func) 
+        public static Tuple<int, string> Run(string code, string input, string output, string func) 
         {
             //Jeśli input jest pusty przypisz do niego pusty literał
             if(input == null)
@@ -45,7 +45,7 @@ namespace Competition_Programs_Checker.Logic
             }
             catch(Exception e)
             {
-                return "Wybrana funkcja nie istnieje";
+                return Tuple.Create(3, "Wybrana funkcja nie istnieje");
             }
 
             try
@@ -55,16 +55,16 @@ namespace Competition_Programs_Checker.Logic
             }
             catch (Exception e)
             {
-                return "Wystąpił błąd: " + e.Message;
+                return Tuple.Create(2, "Wystąpił błąd: " + e.Message);
             }
 
             if (result.Equals(output))
             {
-                return "Prawidłowy wynik: " + output + " = " + result;
+                return Tuple.Create(0, "Prawidłowy wynik: " + output + " = " + result);
             }
             else
             {
-                return "Błędny wynik: " + output + " != " + result;
+                return Tuple.Create(1, "Błędny wynik: " + output + " != " + result);
             }
 
         }

@@ -10,7 +10,7 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class JavaLogic
     {
-        public static string Run(string code, string inputs, string output, string className)
+        public static Tuple<int, string> Run(string code, string inputs, string output, string className)
         {
             Process process = new Process();
             string input="";
@@ -78,21 +78,21 @@ namespace Competition_Programs_Checker.Logic
                 {
                     if (strOutput.Equals(output))
                     {
-                        return "Prawidłowy wynik: " + output + " = " + strOutput;
+                        return Tuple.Create(0, "Prawidłowy wynik: " + output + " = " + strOutput);
                     }
                     else
                     {
-                        return "Błędny wynik: " + output + " != " + strOutput;
+                        return Tuple.Create(1, "Błędny wynik: " + output + " != " + strOutput);
                     }
                 }
                 else
-                    return strError;
+                    return Tuple.Create(2, strError);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Exception: " + e.Message);
             }
-            return "Error";
+            return Tuple.Create(2, "Error");
         }
     }
 }

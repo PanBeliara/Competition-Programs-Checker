@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AspNetRoles_CRUD.aspx.cs" Inherits="Competition_Programs_Checker.Admin.CRUD.AspNetRoles_CRUD" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="jumbotron">
+    <div class="jumbotron" style="width: 100%; overflow: scroll">
         <asp:GridView ID="myGridview" runat="server" AutoGenerateColumns="false"
                 DataKeyNames="Id" CellPadding="10" CellSpacing="0"
                 ShowFooter="true"

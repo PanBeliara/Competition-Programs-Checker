@@ -18,9 +18,20 @@ namespace Competition_Programs_Checker
 
         protected void sendTask_Click(object sender, EventArgs e)
         {
-            //Program pobiera dane we/wy z bazy danych
-            if (RadioButtonList1.SelectedValue.Equals("0"))
+
+            /* W sekcji tej wartości zwracane z funkcji logiki są obiektami Tuple<int, string>
+             * Pierwsza wartość w obiekcie Tuple określa status wykonanego programu:
+             *  0 - Prawidłowy wynik
+             *  1 - Błędny wynik
+             *  2 - Wystąpił błąd
+             *  3 - Wybrana funkcja nie istnieje
+             *  4 - 
+             * Druga wartość natomiast zawiera wiadomość zwracaną użytkownikowi
+             */
+
+            if (RadioButtonList1.SelectedValue.Equals("0")) 
             {
+                //Program pobiera dane we/wy z bazy danych
                 List<TestRun> tests = getTests();
                 string result = "";
                 int good = 0;
@@ -33,12 +44,12 @@ namespace Competition_Programs_Checker
                         foreach (TestRun test in tests)
                         {
                             var currResult = Logic.PythonLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, functionName.Text.Trim());
-                            if (currResult.Substring(0, 1).Equals("P"))
+                            if (currResult.Item1 == 0)
                             {
                                 good++;
                             }
                             overall++;
-                            result = result + "<br />" + currResult;
+                            result = result + "<br />" + currResult.Item2;
                         }
 
                         result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
@@ -49,27 +60,27 @@ namespace Competition_Programs_Checker
                         foreach (TestRun test in tests)
                         {
                             var currResult = Logic.JavaLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, JavaClassName.Text.Trim());
-                            if (currResult.Substring(0, 1).Equals("P"))
+                            if (currResult.Item1 == 0)
                             {
                                 good++;
                             }
                             overall++;
-                            result = result + "<br />" + currResult;
+                            result = result + "<br />" + currResult.Item2;
                         }
                         result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
                         resultTextBox.Text = result;
                         break;
 
-                    case ("C"):
+                    case ("C++"):
                         foreach (TestRun test in tests)
                         {
                             var currResult = Logic.CLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, CFileName.Text.Trim());
-                            if (currResult.Substring(0, 1).Equals("P"))
+                            if (currResult.Item1 == 0)
                             {
                                 good++;
                             }
                             overall++;
-                            result = result + "<br />" + currResult;
+                            result = result + "<br />" + currResult.Item2;
                         }
                         result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
                         resultTextBox.Text = result;
@@ -85,16 +96,16 @@ namespace Competition_Programs_Checker
                 switch (DropDownList2.SelectedValue)
                 {
                     case ("Python"):
-                        string result = Logic.PythonLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, functionName.Text);
-                        resultTextBox.Text = result;
+                        var result = Logic.PythonLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, functionName.Text);
+                        resultTextBox.Text = result.Item2;
                         break;
                     case ("Java"):
-                        string resultJava = Logic.JavaLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, JavaClassName.Text);
-                        resultTextBox.Text = resultJava;
+                        var resultJava = Logic.JavaLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, JavaClassName.Text);
+                        resultTextBox.Text = resultJava.Item2;
                         break;
-                    case ("C"):
-                        string resultC = Logic.CLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, CFileName.Text);
-                        resultTextBox.Text = resultC;
+                    case ("C++"):
+                        var resultC = Logic.CLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, CFileName.Text);
+                        resultTextBox.Text = resultC.Item2;
                         break;
                     case ("Javascript"):
                         Logic.JavascriptLogic.Run();

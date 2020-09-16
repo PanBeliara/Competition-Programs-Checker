@@ -9,7 +9,7 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class CLogic
     {
-        public static string Run(string code, string inputs, string output, string fileName)
+        public static Tuple<int, string> Run(string code, string inputs, string output, string fileName)
         {
             Process process = new Process();
             string input = "";
@@ -57,7 +57,7 @@ namespace Competition_Programs_Checker.Logic
                 process.WaitForExit();
                 process.Close();
                 if (!strError.Equals(""))
-                    return strError;
+                    return Tuple.Create(2, strError);
                 process.StartInfo.FileName = "cmd.exe";
                 //Wskazanie pliku .class
                 process.StartInfo.Arguments = "/c " +  Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/" + fileName+".exe") + Convert.ToChar(34) + input;
@@ -81,21 +81,21 @@ namespace Competition_Programs_Checker.Logic
                 {
                     if (strOutput.Equals(output))
                     {
-                        return "Prawidłowy wynik: " + output + " = " + strOutput;
+                        return Tuple.Create(0, "Prawidłowy wynik: " + output + " = " + strOutput);
                     }
                     else
                     {
-                        return "Błędny wynik: " + output + " != " + strOutput;
+                        return Tuple.Create(1, "Błędny wynik: " + output + " != " + strOutput);
                     }
                 }
                 else
-                    return strError;
+                    return Tuple.Create(2, strError);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Exception: " + e.Message);
             }
-            return "Error";
+            return Tuple.Create(2, "Error");
         }
     }
 }
