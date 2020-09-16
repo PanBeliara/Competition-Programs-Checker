@@ -74,7 +74,7 @@ namespace Competition_Programs_Checker
                     case ("C++"):
                         foreach (TestRun test in tests)
                         {
-                            var currResult = Logic.CLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, CFileName.Text.Trim());
+                            var currResult = Logic.CLogic.Run(codeTextBox.Text.Trim(), test.input, test.output);
                             if (currResult.Item1 == 0)
                             {
                                 good++;
@@ -104,7 +104,7 @@ namespace Competition_Programs_Checker
                         resultTextBox.Text = resultJava.Item2;
                         break;
                     case ("C++"):
-                        var resultC = Logic.CLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, CFileName.Text);
+                        var resultC = Logic.CLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text);
                         resultTextBox.Text = resultC.Item2;
                         break;
                     case ("Javascript"):

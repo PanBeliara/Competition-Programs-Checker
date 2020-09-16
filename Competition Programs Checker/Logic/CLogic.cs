@@ -9,7 +9,7 @@ namespace Competition_Programs_Checker.Logic
 {
     public static class CLogic
     {
-        public static Tuple<int, string> Run(string code, string inputs, string output, string fileName)
+        public static Tuple<int, string> Run(string code, string inputs, string output)
         {
             Process process = new Process();
             string input = "";
@@ -28,7 +28,7 @@ namespace Competition_Programs_Checker.Logic
             {
                 //Pass the filepath and filename to the StreamWriter Constructor
 
-                StreamWriter sw = new StreamWriter(HttpContext.Current.Server.MapPath("~/Logic/" + fileName + ".cpp"));
+                StreamWriter sw = new StreamWriter(HttpContext.Current.Server.MapPath("~/Logic/program.cpp"));
 
 
 
@@ -46,7 +46,7 @@ namespace Competition_Programs_Checker.Logic
             {
                 process.StartInfo.FileName = "cmd.exe";
 
-                process.StartInfo.Arguments = "/c g++ -o "+ Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/" + fileName) + Convert.ToChar(34)+" "+ Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/" + fileName + ".cpp") + Convert.ToChar(34);
+                process.StartInfo.Arguments = "/c g++ -o "+ Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/program") + Convert.ToChar(34)+" "+ Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/program.cpp") + Convert.ToChar(34);
                 process.StartInfo.CreateNoWindow = false;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.UseShellExecute = false;
@@ -60,7 +60,7 @@ namespace Competition_Programs_Checker.Logic
                     return Tuple.Create(2, strError);
                 process.StartInfo.FileName = "cmd.exe";
                 //Wskazanie pliku .class
-                process.StartInfo.Arguments = "/c " +  Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/" + fileName+".exe") + Convert.ToChar(34) + input;
+                process.StartInfo.Arguments = "/c " +  Convert.ToChar(34) + HttpContext.Current.Server.MapPath("~/Logic/program.exe") + Convert.ToChar(34) + input;
                 process.StartInfo.CreateNoWindow = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
