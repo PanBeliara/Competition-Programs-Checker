@@ -40,7 +40,6 @@ namespace Competition_Programs_Checker
                 switch (DropDownList2.SelectedValue)
                 {
                     case ("Python"):
-
                         foreach (TestRun test in tests)
                         {
                             var currResult = Logic.PythonLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, functionName.Text.Trim());
@@ -85,8 +84,19 @@ namespace Competition_Programs_Checker
                         result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
                         resultTextBox.Text = result;
                         break;
-                    case ("Javascript"):
-                        Logic.JavascriptLogic.Run();
+                    case ("JavaScript"):
+                        foreach (TestRun test in tests)
+                        {
+                            var currResult = Logic.JavascriptLogic.Run(codeTextBox.Text.Trim(), test.input, test.output);
+                            if (currResult.Item1 == 0)
+                            {
+                                good++;
+                            }
+                            overall++;
+                            result = result + "<br />" + currResult.Item2;
+                        }
+                        result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
+                        resultTextBox.Text = result;
                         break;
                 }
             }
@@ -107,13 +117,14 @@ namespace Competition_Programs_Checker
                         var resultC = Logic.CLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text);
                         resultTextBox.Text = resultC.Item2;
                         break;
-                    case ("Javascript"):
-                        Logic.JavascriptLogic.Run();
+                    case ("JavaScript"):
+                        var resultJavascript = Logic.JavascriptLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text);
+                        resultTextBox.Text = resultJavascript.Item2;
                         break;
                 }
             }
         }
-
+        
         protected List<TestRun> getTests()
         {
             List<TestRun> tests = new List<TestRun>();
