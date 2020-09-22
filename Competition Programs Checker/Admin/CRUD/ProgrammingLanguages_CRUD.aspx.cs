@@ -71,6 +71,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
                             language_name = txtLanguageName.Text.Trim()
                         });
 
+                        dc.SaveChanges();
                         PopulateTable();
                     }
                 }

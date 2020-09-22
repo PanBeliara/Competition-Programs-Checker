@@ -17,8 +17,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [language_name] FROM [ProgrammingLanguages]"></asp:SqlDataSource>
-                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="language_name"></asp:DropDownList>
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [language_name], [id] FROM [ProgrammingLanguages]"></asp:SqlDataSource>
+                    <asp:DropDownList ID="LanguageDropdownList" runat="server" DataSourceID="SqlDataSource2" DataTextField="language_name" DataValueField="id"></asp:DropDownList>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col">
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [code], [title], [id] FROM [Problem]"></asp:SqlDataSource>
-                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="code" DataValueField="id"></asp:DropDownList>
+                    <asp:DropDownList ID="TaskDropdownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="code" DataValueField="id"></asp:DropDownList>
                 </div>
                 <div class="col">
                     
@@ -77,8 +77,10 @@
             <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
         </div> 
 
+        Wyślij wynik do bazy danych: 
+        <asp:CheckBox ID="uploadCheckBox" runat="server" />
         <br />
-        <asp:Button ID="sendTask" runat="server" Text="Send" OnClick="sendTask_Click" />
+        <asp:Button ID="sendTask" runat="server" Text="Wyślij" OnClick="sendTask_Click" />
 
         <br />
         <asp:Label ID="resultTextBox" runat="server"></asp:Label>
@@ -89,7 +91,7 @@
                 checkRadioSelection();
                 checkLanguageDropdown();
 
-                $('#<%= DropDownList2.ClientID %>').change(function () {
+                $('#<%= LanguageDropdownList.ClientID %>').change(function () {
                     checkLanguageDropdown();
                 });
 
@@ -105,13 +107,11 @@
                 java.style.display = "none";
                 python.style.display = "none";
 
-                switch ($('#<%= DropDownList2.ClientID %>').val()) {
-                    case 'Java':
+                switch ($('#<%= LanguageDropdownList.ClientID %>').val()) {
+                    case '4':
                         java.style.display = "block";
                         break;
-                    case 'JavaScript':
-                        break;
-                    case 'Python':
+                    case '1':
                         python.style.display = "block";
                         break;
                 }

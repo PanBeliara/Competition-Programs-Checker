@@ -71,6 +71,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
                             Name = txtName.Text.Trim()
                         });
 
+                        dc.SaveChanges();
                         PopulateTable();
                     }
                 }

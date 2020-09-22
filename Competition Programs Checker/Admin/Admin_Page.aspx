@@ -29,15 +29,7 @@
                     <a class="btn btn-primary btn-lg btn-block" href="/Admin/CRUD/Solutions_CRUD">Solutions CRUD &raquo;</a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-primary btn-lg btn-block" href="/Admin/CRUD/SolutionsQueue_CRUD">Solutions Queue CRUD &raquo;</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
                     <a class="btn btn-primary btn-lg btn-block" href="/Admin/CRUD/TestRuns_CRUD">TestRuns CRUD &raquo;</a>
-                </div>
-                <div class="col">
-                    
                 </div>
             </div>
         </div>

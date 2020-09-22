@@ -46,6 +46,7 @@ namespace Competition_Programs_Checker.Teacher
 
             FillTable();
         }
+
         private void GetFieldsDataOnce()
         {
             if(Session["code"] == null || Session["title"] == null)

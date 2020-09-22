@@ -86,6 +86,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
 
                         });
 
+                        dc.SaveChanges();
                         PopulateTable();
                     }
                 }

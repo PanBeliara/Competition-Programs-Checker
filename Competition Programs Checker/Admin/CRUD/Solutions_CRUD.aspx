@@ -13,6 +13,7 @@
                 OnRowUpdating="myGridview_RowUpdating" >
 
                 <Columns>
+
                     <asp:TemplateField>
                         <HeaderTemplate>Problem ID</HeaderTemplate>
                         <ItemTemplate><%#Eval("problem_id") %></ItemTemplate>
@@ -47,7 +48,7 @@
                         <HeaderTemplate>Code</HeaderTemplate>
                         <ItemTemplate><%#Eval("code") %></ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtCode" runat="server" Text='<%#Bind("author") %>' />
+                            <asp:TextBox ID="txtCode" runat="server" Text='<%#Bind("code") %>' />
                             <asp:RequiredFieldValidator ID="codeEdit" runat="server" ForeColor="Red" ErrorMessage="*"
                                  Display="Dynamic" ValidationGroup="edit" ControlToValidate="txtCode">Required</asp:RequiredFieldValidator>
                         </EditItemTemplate>
