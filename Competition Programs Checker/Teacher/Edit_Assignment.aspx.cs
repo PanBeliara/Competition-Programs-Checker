@@ -118,6 +118,7 @@ namespace Competition_Programs_Checker.Teacher
                 maxTestRunPosition.Insert();
             }
 
+            Session.Clear();
             Response.Redirect("Teacher_Page.aspx");
         }
         protected void GetLastUsedProblemId(object sender, SqlDataSourceStatusEventArgs e)
