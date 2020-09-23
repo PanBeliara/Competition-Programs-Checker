@@ -22,7 +22,10 @@ namespace Competition_Programs_Checker.Teacher
         {
             if (Session["rows"] != null)
                 rows = (List<ItemsRow>)Session["rows"];
-            
+
+            if (Session["internally_redirected"] == null)
+                Session["internally_redirected"] = 'n';
+
             foreach (ItemsRow row in rows)
             {
                 row.SetOnClickEvent(new EventHandler(RemoveRow));
@@ -31,12 +34,20 @@ namespace Competition_Programs_Checker.Teacher
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack || Session["internally_redirected"].ToString() == "n")
+                Session["internally_redirected"] = 'n';
+
             if (Session["code"] != null)
                 code.Text = Session["code"].ToString();
             if (Session["title"] != null)
                 title.Text = Session["title"].ToString();
 
             FillTable();
+        }
+        protected void Page_Unload(object sender, EventArgs e)
+        {
+            if (Session["internally_redirected"].ToString() == "n")
+                Session.Clear();
         }
 
         private void FillTable()
@@ -94,6 +105,7 @@ namespace Competition_Programs_Checker.Teacher
             Session["code"] = code.Text;
             Session["title"] = title.Text;
 
+            Session["internally_redirected"] = 'y';
             Response.Redirect("Add_Assignment.aspx"); //kluczowe
         }
 
@@ -111,6 +123,7 @@ namespace Competition_Programs_Checker.Teacher
                     Session["code"] = code.Text;
                     Session["title"] = title.Text;
 
+                    Session["internally_redirected"] = 'y';
                     Response.Redirect("Add_Assignment.aspx"); //kluczowe
                 }
             }
@@ -120,9 +133,5 @@ namespace Competition_Programs_Checker.Teacher
         {
             args.IsValid = rows.Count > 0;
         }
-
-
     }
-
-    
 }
