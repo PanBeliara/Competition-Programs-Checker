@@ -12,17 +12,16 @@ namespace Competition_Programs_Checker.Logic
     {
         public static Tuple<int, string> Run(string code, string input, string output, string func) 
         {
-            //Jeśli input jest pusty przypisz do niego pusty literał
-            if(input == null)
-            {
-                input = " ";
-            }
-
-            //Zamiana inputów w postaci stringa na array
-            string[] inputArr = input.Split(',');
-
+            string[] inputArr = Array.Empty<string>();
             dynamic testFunction;
             string result;
+
+            //Sprawdzenie czy zostały podane zmienne wejściowe
+            bool argumentsGiven = !string.IsNullOrEmpty(input);
+
+            //Zamiana inputów w postaci stringa na array (jeśli takowe zostały podane
+            if (argumentsGiven)
+                inputArr = input.Split(',');
 
             //Utworzenie nowego obiektu typu ScriptEngine
             ScriptEngine engine = IronPython.Hosting.Python.CreateEngine();
@@ -50,8 +49,16 @@ namespace Competition_Programs_Checker.Logic
 
             try
             {
-                //Wywołanie funkcji testowej ze zmienną input i przypisanie wyniku do zmiennej typu var
-                result = Convert.ToString(testFunction(inputArr));
+                if(argumentsGiven)
+                {
+                    //Wywołanie funkcji testowej ze zmienną input i przypisanie wyniku do zmiennej typu var
+                    result = Convert.ToString(testFunction(inputArr));
+                }
+                else
+                {
+                    //Wywołanie funkcji testowej i przypisanie wyniku do zmiennej typu var
+                    result = Convert.ToString(testFunction());
+                }
             }
             catch (Exception e)
             {

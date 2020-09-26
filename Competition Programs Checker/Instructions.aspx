@@ -6,13 +6,15 @@
 
     <input type="button" value="Python" onclick="slidePanel('<%= Panel1.ClientID %>')" class="btn btn-secondary btn-lg btn-block" />
 
-    <asp:Panel ID="Panel1" runat="server" style="display: none;">
-        Python program checker converts every input variable into an array of string variables and passes that array into the python function you're trying to call, so:
+    <asp:Panel ID="Panel1" runat="server" style="display: none;"> 
         <ul>
-            <li>Always add one variable to the python function since the program checker always passes an array there (even if it's empty)</li>
-            <li>Separate your variables with commas since that's what they're being split by</li>
-            <li>Remember to change the variable types in your python code since they're being passed as string variables</li>
-            <li>When returning values to the program checker, remember to change them back into strings, as it's the expected output variable type</li>
+            <li>Zwracając wartości do sprawdzarki programów, pamiętaj zmienić je na zmienne typu string - jest to oczekiwany typ zmiennej wyjściowej</li>
+            <li>Jeśli funkcja Pythona którą próbujesz wywołać wymaga podania zmiennych wejściowych pamiętaj:
+                <ul>
+                    <li>Oddzielić swoje zmienne wejściowe przecinkami</li>
+                    <li>Zmienić rodzaj zmiennych w smoim kodzie pythona - domyślnie są one przekazywane jako zmienne typu string</li>
+                </ul>
+            </li>  
         </ul>
     </asp:Panel>
 

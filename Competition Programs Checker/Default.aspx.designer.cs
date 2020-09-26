@@ -60,6 +60,15 @@ namespace Competition_Programs_Checker
         protected global::System.Web.UI.WebControls.DropDownList TaskDropdownList;
 
         /// <summary>
+        /// uploadCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox uploadCheckBox;
+
+        /// <summary>
         /// inputTextBox control.
         /// </summary>
         /// <remarks>
@@ -121,15 +130,6 @@ namespace Competition_Programs_Checker
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox functionName;
-
-        /// <summary>
-        /// uploadCheckBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox uploadCheckBox;
 
         /// <summary>
         /// sendTask control.

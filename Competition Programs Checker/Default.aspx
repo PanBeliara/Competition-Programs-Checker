@@ -41,6 +41,13 @@
                     
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col">
+                    Wyślij wynik do bazy danych: 
+                    <asp:CheckBox ID="uploadCheckBox" runat="server" />
+                </div>
+            </div>
         </div>
 
         <div class="container" id="test" style="display:none;">
@@ -52,6 +59,7 @@
                     Dane wyjściowe:
                 </div>
             </div>
+
             <div class="row">
                 <div class="col">
                     <asp:TextBox ID="inputTextBox" runat="server"></asp:TextBox>
@@ -62,7 +70,6 @@
             </div>
         </div>
 
-        <br />
         Kod programu:
         <br />
         <asp:TextBox CssClass="form-control" ID="codeTextBox" runat="server" TextMode="MultiLine"></asp:TextBox>
@@ -77,9 +84,6 @@
             <asp:TextBox ID="functionName" runat="server"></asp:TextBox>
         </div> 
 
-        Wyślij wynik do bazy danych: 
-        <asp:CheckBox ID="uploadCheckBox" runat="server" />
-        <br />
         <asp:Button ID="sendTask" runat="server" Text="Wyślij" OnClick="sendTask_Click" />
 
         <br />
@@ -130,6 +134,7 @@
                         break;
                     case '1':
                         test.style.display = "block";
+                        document.getElementById("<%=uploadCheckBox.ClientID%>").checked = false;
                         break;
                 }
             }

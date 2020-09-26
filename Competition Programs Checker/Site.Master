@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Sprawdzarka programów</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -50,7 +50,7 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a runat="server" class="nav-link" href="~/Instructions"><b>Instrukcja</b></a>
+                        <a runat="server" class="nav-link" href="~/Instructions"><b>Instrukcje</b></a>
                     </li>
 
                     <asp:LoginView id="LoginView2" runat="server">
@@ -58,17 +58,17 @@
                                 <asp:RoleGroup Roles="Admin">
                                     <ContentTemplate>
                                         <li class="nav-item">
-                                            <a runat="server" class="nav-link" href="~/Admin/Admin_Page"><b>Admin</b></a>
+                                            <a runat="server" class="nav-link" href="~/Admin/Admin_Page"><b>Administrator</b></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a runat="server" class="nav-link" href="~/Teacher/Teacher_Page"><b>Teacher</b></a>
+                                            <a runat="server" class="nav-link" href="~/Teacher/Teacher_Page"><b>Nauczyciel</b></a>
                                         </li>
                                     </ContentTemplate>
                                 </asp:RoleGroup>
                                 <asp:RoleGroup Roles="Teacher">
                                 <ContentTemplate>
                                     <li class="nav-item">
-                                        <a runat="server" class="nav-link" href="~/Teacher/Teacher_Page"><b>Teacher</b></a>
+                                        <a runat="server" class="nav-link" href="~/Teacher/Teacher_Page"><b>Nauczyciel</b></a>
                                     </li>
                                 </ContentTemplate>
                             </asp:RoleGroup>
@@ -80,20 +80,20 @@
                     <AnonymousTemplate>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item">
-                                <a runat="server" class="nav-link" href="~/Account/Register">Register</a>
+                                <a runat="server" class="nav-link" href="~/Account/Register">Rejestracja</a>
                             </li>
                             <li class="nav-item">
-                                <a runat="server" class="nav-link" href="~/Account/Login">Log in</a>
+                                <a runat="server" class="nav-link" href="~/Account/Login">Logowanie</a>
                             </li>
                         </ul>
                     </AnonymousTemplate>
                     <LoggedInTemplate>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item">
-                                <a runat="server" class="nav-link" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a>
+                                <a runat="server" class="nav-link" href="~/Account/Manage" title="Manage your account"> <%: Context.User.Identity.GetUserName()  %> !</a>
                             </li>
                             <li class="nav-item">
-                                <asp:LoginStatus runat="server" class="btn btn-outline-success my-2 my-sm-0" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                <asp:LoginStatus runat="server" class="btn btn-outline-success my-2 my-sm-0" LogoutAction="Redirect" LogoutText="Wyloguj się" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                             </li>
                         </ul>
                     </LoggedInTemplate>
@@ -106,7 +106,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Sprawdzarka programów</p>
             </footer>
         </div>
     </form>
