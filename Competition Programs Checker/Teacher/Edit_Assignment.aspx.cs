@@ -23,6 +23,9 @@ namespace Competition_Programs_Checker.Teacher
             if (Session["rows"] != null)
                 rows = (List<ItemsRow>)Session["rows"];
 
+            if (Session["internally_redirected"] == null)
+                Session["internally_redirected"] = 'n';
+
             foreach (ItemsRow row in rows)
             {
                 row.SetOnClickEvent(new EventHandler(RemoveRow));
@@ -33,8 +36,10 @@ namespace Competition_Programs_Checker.Teacher
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!IsPostBack || Session["internally_redirected"].ToString() == "n")
             {
+                Session["internally_redirected"] = 'n';
+
                 if (Session["code"] != null)
                     code.Text = Session["code"].ToString();
                 if (Session["title"] != null)
@@ -46,6 +51,13 @@ namespace Competition_Programs_Checker.Teacher
 
             FillTable();
         }
+        protected void Page_Unload(object sender, EventArgs e)
+        {
+            if(Session["internally_redirected"].ToString() == "n")
+                Session.Clear();
+        }
+
+
         private void GetFieldsDataOnce()
         {
             if(Session["code"] == null || Session["title"] == null)
@@ -75,6 +87,7 @@ namespace Competition_Programs_Checker.Teacher
                 }
                 Session["rows"] = rows;
 
+                Session["internally_redirected"] = 'y';
                 Response.Redirect("Edit_Assignment.aspx?id=" + _problemId);
             }
         }
@@ -118,7 +131,6 @@ namespace Competition_Programs_Checker.Teacher
                 maxTestRunPosition.Insert();
             }
 
-            Session.Clear();
             Response.Redirect("Teacher_Page.aspx");
         }
         protected void GetLastUsedProblemId(object sender, SqlDataSourceStatusEventArgs e)
@@ -137,6 +149,7 @@ namespace Competition_Programs_Checker.Teacher
             Session["code"] = code.Text;
             Session["title"] = title.Text;
 
+            Session["internally_redirected"] = 'y';
             Response.Redirect("Edit_Assignment.aspx?id=" + _problemId); //kluczowe
         }
 
@@ -154,6 +167,7 @@ namespace Competition_Programs_Checker.Teacher
                     Session["code"] = code.Text;
                     Session["title"] = title.Text;
 
+                    Session["internally_redirected"] = 'y';
                     Response.Redirect("Edit_Assignment.aspx?id=" + _problemId); //kluczowe
                 }
             }
