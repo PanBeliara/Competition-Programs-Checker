@@ -190,5 +190,21 @@ namespace Competition_Programs_Checker
                 dc.SaveChanges();
             }
         }
+
+        protected void displayPDF_Click(object sender, EventArgs e)
+        {
+            byte[] pdfBytes;
+
+            using (DatabaseEntities dc = new DatabaseEntities())
+            {
+                int id = Convert.ToInt32(TaskDropdownList.SelectedValue);
+                Problem pro = dc.Problems.Where(a => a.id == id).FirstOrDefault();
+                pdfBytes = pro.assignment;
+            }
+
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-length", pdfBytes.Length.ToString());
+            Response.BinaryWrite(pdfBytes);
+        }
     }
 }

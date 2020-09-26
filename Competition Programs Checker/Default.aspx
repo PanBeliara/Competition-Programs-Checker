@@ -43,6 +43,12 @@
             </div>
             
             <div class="row">
+                <div class="col pb-md-1 pt-md-1">
+                    <asp:Button ID="displayPDF" runat="server" Text="Wyświetl treść zadania" OnClick="displayPDF_Click" class="btn btn-secondary"/>
+                </div>
+            </div>
+            
+            <div class="row">
                 <div class="col">
                     Wyślij wynik do bazy danych: 
                     <asp:CheckBox ID="uploadCheckBox" runat="server" />
