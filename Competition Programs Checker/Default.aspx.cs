@@ -1,11 +1,9 @@
 ﻿using Competition_Programs_Checker.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 
 namespace Competition_Programs_Checker
 {
@@ -36,10 +34,14 @@ namespace Competition_Programs_Checker
                 string result = "";
                 int good = 0;
                 int overall = 0;
+                bool error = false;
+                DateTime time_before_exec = DateTime.Now;
+                DateTime time_after_exec;
+                TimeSpan time_offset;
 
-                switch (DropDownList2.SelectedValue)
+                switch (LanguageDropdownList.SelectedValue)
                 {
-                    case ("Python"):
+                    case ("1"):
                         foreach (TestRun test in tests)
                         {
                             var currResult = Logic.PythonLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, functionName.Text.Trim());
@@ -47,6 +49,10 @@ namespace Competition_Programs_Checker
                             {
                                 good++;
                             }
+                            else if(currResult.Item1 == 2)
+                            {
+                                error = true;
+                            }
                             overall++;
                             result = result + "<br />" + currResult.Item2;
                         }
@@ -55,7 +61,7 @@ namespace Competition_Programs_Checker
                         resultTextBox.Text = result;
                         break;
 
-                    case ("Java"):
+                    case ("4"):
                         foreach (TestRun test in tests)
                         {
                             var currResult = Logic.JavaLogic.Run(codeTextBox.Text.Trim(), test.input, test.output, JavaClassName.Text.Trim());
@@ -63,20 +69,9 @@ namespace Competition_Programs_Checker
                             {
                                 good++;
                             }
-                            overall++;
-                            result = result + "<br />" + currResult.Item2;
-                        }
-                        result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
-                        resultTextBox.Text = result;
-                        break;
-
-                    case ("C++"):
-                        foreach (TestRun test in tests)
-                        {
-                            var currResult = Logic.CLogic.Run(codeTextBox.Text.Trim(), test.input, test.output);
-                            if (currResult.Item1 == 0)
+                            else if (currResult.Item1 == 2)
                             {
-                                good++;
+                                error = true;
                             }
                             overall++;
                             result = result + "<br />" + currResult.Item2;
@@ -84,13 +79,36 @@ namespace Competition_Programs_Checker
                         result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
                         resultTextBox.Text = result;
                         break;
-                    case ("JavaScript"):
+
+                    case ("3"):
+                        foreach (TestRun test in tests)
+                        {
+                            var currResult = Logic.CLogic.Run(codeTextBox.Text.Trim(), test.input, test.output);
+                            if (currResult.Item1 == 0)
+                            {
+                                good++;
+                            }
+                            else if (currResult.Item1 == 2)
+                            {
+                                error = true;
+                            }
+                            overall++;
+                            result = result + "<br />" + currResult.Item2;
+                        }
+                        result = result + "<br />" + "Wynik = " + good + "/" + overall + " || " + (Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100 + "%";
+                        resultTextBox.Text = result;
+                        break;
+                    case ("2"):
                         foreach (TestRun test in tests)
                         {
                             var currResult = Logic.JavascriptLogic.Run(codeTextBox.Text.Trim(), test.input, test.output);
                             if (currResult.Item1 == 0)
                             {
                                 good++;
+                            }
+                            else if (currResult.Item1 == 2)
+                            {
+                                error = true;
                             }
                             overall++;
                             result = result + "<br />" + currResult.Item2;
@@ -99,25 +117,34 @@ namespace Competition_Programs_Checker
                         resultTextBox.Text = result;
                         break;
                 }
+
+                if (uploadCheckBox.Checked)
+                {
+                    time_after_exec = DateTime.Now;
+                    time_offset = time_after_exec - time_before_exec;
+
+                    uploadResults(Convert.ToInt32(TaskDropdownList.SelectedValue), codeTextBox.Text.Trim(), Convert.ToInt32(LanguageDropdownList.SelectedValue), time_before_exec, time_after_exec, time_offset.TotalSeconds.ToString(), error, ((Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100).ToString());
+                }
+
             }
             //Program pobiera dane we/wy z textboxów
             else
             {
-                switch (DropDownList2.SelectedValue)
+                switch (LanguageDropdownList.SelectedValue)
                 {
-                    case ("Python"):
+                    case ("1"):
                         var result = Logic.PythonLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, functionName.Text);
                         resultTextBox.Text = result.Item2;
                         break;
-                    case ("Java"):
+                    case ("4"):
                         var resultJava = Logic.JavaLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text, JavaClassName.Text);
                         resultTextBox.Text = resultJava.Item2;
                         break;
-                    case ("C++"):
+                    case ("3"):
                         var resultC = Logic.CLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text);
                         resultTextBox.Text = resultC.Item2;
                         break;
-                    case ("JavaScript"):
+                    case ("2"):
                         var resultJavascript = Logic.JavascriptLogic.Run(codeTextBox.Text, inputTextBox.Text, outputTextBox.Text);
                         resultTextBox.Text = resultJavascript.Item2;
                         break;
@@ -130,7 +157,7 @@ namespace Competition_Programs_Checker
             List<TestRun> tests = new List<TestRun>();
             using (DatabaseEntities dc = new DatabaseEntities())
             {
-                int problemId = Convert.ToInt32(DropDownList1.SelectedValue);
+                int problemId = Convert.ToInt32(TaskDropdownList.SelectedValue);
                 var Querabletests = dc.TestRuns.Where(x => x.problem_id == problemId);
                 foreach (TestRun test in Querabletests)
                 {
@@ -139,6 +166,29 @@ namespace Competition_Programs_Checker
             }
 
             return tests;
+        }
+
+        protected void uploadResults(int problem_id, string code, int code_language, DateTime submitted_time, DateTime checked_time, string time_offset, bool is_error, string score)
+        {
+            using (DatabaseEntities dc = new DatabaseEntities())
+            {
+                dc.Solutions.Add(new Solution
+                {
+                    id = Guid.NewGuid(),
+                    problem_id = problem_id,
+                    solver_id = User.Identity.GetUserId(),
+                    code = code,
+                    code_language = code_language,
+                    submitted_time = submitted_time,
+                    checked_time = checked_time,
+                    time_offset = time_offset,          //Kolumna pokazuje czas wykonania programu w sekundach
+                    is_error = is_error,
+                    score = score
+
+                });
+
+                dc.SaveChanges();
+            }
         }
     }
 }

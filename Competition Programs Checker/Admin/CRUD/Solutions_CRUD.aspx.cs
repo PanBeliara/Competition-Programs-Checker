@@ -1,6 +1,7 @@
 ﻿using Competition_Programs_Checker.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -79,18 +80,20 @@ namespace Competition_Programs_Checker.Admin.CRUD
                     {
                         dc.Solutions.Add(new Solution
                         {
+                            id = Guid.NewGuid(),
                             problem_id = Convert.ToInt32(txtProblemId.Text.Trim()),
                             solver_id = txtSolverId.Text.Trim(),
                             code = txtCode.Text.Trim(),
                             code_language = Convert.ToInt32(txtCodeLanguage.Text.Trim()),
                             submitted_time = Convert.ToDateTime(txtSubmittedTime.Text.Trim()),
                             checked_time = Convert.ToDateTime(txtCheckedTime.Text.Trim()),
-                            time_offset = Convert.ToDateTime(txtTimeOffset.Text.Trim()),
+                            time_offset = txtTimeOffset.Text.Trim(),
                             is_error = Convert.ToBoolean(txtIsError.Text.Trim()),
                             score = txtScore.Text.Trim()
 
                         });
 
+                        dc.SaveChanges();
                         PopulateTable();
                     }
                 }
@@ -121,7 +124,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
 
             //Get Contact ID
             //int userID = (int)myGridview.DataKeys[e.RowIndex]["Id"];
-            string solutionId = (string)myGridview.DataKeys[e.RowIndex]["id"];
+            Guid solutionId = (Guid)myGridview.DataKeys[e.RowIndex]["Id"];
 
             //Find Controls
             TextBox txtProblemId = (TextBox)myGridview.Rows[e.RowIndex].FindControl("txtProblemId");
@@ -147,7 +150,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
                     v.code_language = Convert.ToInt32(txtCodeLanguage.Text.Trim());
                     v.submitted_time = Convert.ToDateTime(txtCheckedTime.Text.Trim());
                     v.checked_time = Convert.ToDateTime(txtSubmittedTime.Text.Trim());
-                    v.time_offset = Convert.ToDateTime(txtTimeOffset.Text.Trim());
+                    v.time_offset = txtTimeOffset.Text.Trim();
                     v.is_error = Convert.ToBoolean(txtIsError.Text.Trim());
                     v.score = txtScore.Text.Trim();
 
@@ -160,8 +163,8 @@ namespace Competition_Programs_Checker.Admin.CRUD
 
         protected void myGridview_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            //int userID = (int)myGridview.DataKeys[e.RowIndex]["Id"];
-            string solutionId = (string)myGridview.DataKeys[e.RowIndex]["id"];
+            Guid solutionId = (Guid)myGridview.DataKeys[e.RowIndex]["Id"];
+
             using (DatabaseEntities dc = new DatabaseEntities())
             {
                 var v = dc.Solutions.Where(a => a.id.Equals(solutionId)).FirstOrDefault();

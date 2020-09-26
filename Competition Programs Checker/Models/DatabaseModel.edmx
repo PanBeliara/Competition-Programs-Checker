@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -87,27 +87,9 @@
           <Property Name="code_language" Type="int" />
           <Property Name="submitted_time" Type="datetime" Nullable="false" />
           <Property Name="checked_time" Type="datetime" Nullable="false" />
-          <Property Name="time_offset" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="time_offset" Type="varchar" MaxLength="50" />
           <Property Name="is_error" Type="bit" />
           <Property Name="score" Type="nvarchar" MaxLength="15" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733.dbo.SolutionsQueue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="SolutionsQueue">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="solver_id" />
-            <PropertyRef Name="code" />
-            <PropertyRef Name="submitted_time" />
-            <PropertyRef Name="time_offset" />
-          </Key>
-          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="problem_id" Type="int" />
-          <Property Name="solver_id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="code" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="code_language" Type="int" />
-          <Property Name="submitted_time" Type="datetime" Nullable="false" />
-          <Property Name="time_offset" Type="datetimeoffset" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="TestRuns">
           <Key>
@@ -131,18 +113,6 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__code___4BAC3F29">
-          <End Role="ProgrammingLanguages" Type="Self.ProgrammingLanguages" Multiplicity="0..1" />
-          <End Role="SolutionsQueue" Type="Self.SolutionsQueue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProgrammingLanguages">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="SolutionsQueue">
-              <PropertyRef Name="code_language" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Solutions__probl__440B1D61">
           <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
           <End Role="Solutions" Type="Self.Solutions" Multiplicity="*" />
@@ -155,20 +125,22 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__probl__4AB81AF0">
-          <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
-          <End Role="SolutionsQueue" Type="Self.SolutionsQueue" Multiplicity="*" />
+        <Association Name="FK__Solutions__solve__01142BA1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Solutions" Type="Self.Solutions" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Problem">
-              <PropertyRef Name="id" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SolutionsQueue">
-              <PropertyRef Name="problem_id" />
+            <Dependent Role="Solutions">
+              <PropertyRef Name="solver_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TestRuns__proble__5DCAEF64">
-          <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
+        <Association Name="FK__TestRuns__proble__6E01572D">
+          <End Role="Problem" Type="Self.Problem" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TestRuns" Type="Self.TestRuns" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Problem">
@@ -235,7 +207,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DbModelStoreContainer">
+        <EntityContainer Name="DatabaseModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -245,34 +217,19 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
           <EntitySet Name="ProgrammingLanguages" EntityType="Self.ProgrammingLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solutions" EntityType="Self.Solutions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestRuns" EntityType="Self.TestRuns" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SolutionsQueue" EntityType="Self.SolutionsQueue" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SolutionsQueue].[id] AS [id], 
-    [SolutionsQueue].[problem_id] AS [problem_id], 
-    [SolutionsQueue].[solver_id] AS [solver_id], 
-    [SolutionsQueue].[code] AS [code], 
-    [SolutionsQueue].[code_language] AS [code_language], 
-    [SolutionsQueue].[submitted_time] AS [submitted_time], 
-    [SolutionsQueue].[time_offset] AS [time_offset]
-    FROM [dbo].[SolutionsQueue] AS [SolutionsQueue]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Solutions__code___44FF419A" Association="Self.FK__Solutions__code___44FF419A">
             <End Role="ProgrammingLanguages" EntitySet="ProgrammingLanguages" />
             <End Role="Solutions" EntitySet="Solutions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Solutions__code___4BAC3F29" Association="Self.FK__Solutions__code___4BAC3F29">
-            <End Role="ProgrammingLanguages" EntitySet="ProgrammingLanguages" />
-            <End Role="SolutionsQueue" EntitySet="SolutionsQueue" />
           </AssociationSet>
           <AssociationSet Name="FK__Solutions__probl__440B1D61" Association="Self.FK__Solutions__probl__440B1D61">
             <End Role="Problem" EntitySet="Problem" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Solutions__probl__4AB81AF0" Association="Self.FK__Solutions__probl__4AB81AF0">
-            <End Role="Problem" EntitySet="Problem" />
-            <End Role="SolutionsQueue" EntitySet="SolutionsQueue" />
+          <AssociationSet Name="FK__Solutions__solve__01142BA1" Association="Self.FK__Solutions__solve__01142BA1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__TestRuns__proble__5DCAEF64" Association="Self.FK__TestRuns__proble__5DCAEF64">
+          <AssociationSet Name="FK__TestRuns__proble__6E01572D" Association="Self.FK__TestRuns__proble__6E01572D">
             <End Role="Problem" EntitySet="Problem" />
             <End Role="TestRuns" EntitySet="TestRuns" />
           </AssociationSet>
@@ -297,7 +254,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -345,6 +302,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__solve__01142BA1" FromRole="AspNetUsers" ToRole="Solutions" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Problem">
@@ -360,8 +318,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
           <Property Name="best_scores_cache" Type="String" MaxLength="3300" FixedLength="false" Unicode="true" />
           <Property Name="worst_best_score" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__probl__440B1D61" FromRole="Problem" ToRole="Solutions" />
-          <NavigationProperty Name="SolutionsQueues" Relationship="Self.FK__Solutions__probl__4AB81AF0" FromRole="Problem" ToRole="SolutionsQueue" />
-          <NavigationProperty Name="TestRuns" Relationship="Self.FK__TestRuns__proble__5DCAEF64" FromRole="Problem" ToRole="TestRuns" />
+          <NavigationProperty Name="TestRuns" Relationship="Self.FK__TestRuns__proble__6E01572D" FromRole="Problem" ToRole="TestRuns" />
         </EntityType>
         <EntityType Name="ProgrammingLanguage">
           <Key>
@@ -370,7 +327,6 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="language_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__code___44FF419A" FromRole="ProgrammingLanguages" ToRole="Solutions" />
-          <NavigationProperty Name="SolutionsQueues" Relationship="Self.FK__Solutions__code___4BAC3F29" FromRole="ProgrammingLanguages" ToRole="SolutionsQueue" />
         </EntityType>
         <EntityType Name="Solution">
           <Key>
@@ -383,9 +339,10 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
           <Property Name="code_language" Type="Int32" />
           <Property Name="submitted_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="checked_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="time_offset" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="time_offset" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="is_error" Type="Boolean" />
           <Property Name="score" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Solutions__solve__01142BA1" FromRole="Solutions" ToRole="AspNetUsers" />
           <NavigationProperty Name="Problem" Relationship="Self.FK__Solutions__probl__440B1D61" FromRole="Solutions" ToRole="Problem" />
           <NavigationProperty Name="ProgrammingLanguage" Relationship="Self.FK__Solutions__code___44FF419A" FromRole="Solutions" ToRole="ProgrammingLanguages" />
         </EntityType>
@@ -398,25 +355,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
           <Property Name="order_position" Type="Int32" Nullable="false" />
           <Property Name="input" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="output" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Problem" Relationship="Self.FK__TestRuns__proble__5DCAEF64" FromRole="TestRuns" ToRole="Problem" />
-        </EntityType>
-        <EntityType Name="SolutionsQueue">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="solver_id" />
-            <PropertyRef Name="code" />
-            <PropertyRef Name="submitted_time" />
-            <PropertyRef Name="time_offset" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="problem_id" Type="Int32" />
-          <Property Name="solver_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="code_language" Type="Int32" />
-          <Property Name="submitted_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="time_offset" Type="DateTimeOffset" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Problem" Relationship="Self.FK__Solutions__probl__4AB81AF0" FromRole="SolutionsQueue" ToRole="Problem" />
-          <NavigationProperty Name="ProgrammingLanguage" Relationship="Self.FK__Solutions__code___4BAC3F29" FromRole="SolutionsQueue" ToRole="ProgrammingLanguages" />
+          <NavigationProperty Name="Problem" Relationship="Self.FK__TestRuns__proble__6E01572D" FromRole="TestRuns" ToRole="Problem" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -446,6 +385,18 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Solutions__solve__01142BA1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Solutions" Type="Self.Solution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solutions">
+              <PropertyRef Name="solver_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Solutions__probl__440B1D61">
           <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
           <End Role="Solutions" Type="Self.Solution" Multiplicity="*" />
@@ -458,20 +409,10 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__probl__4AB81AF0">
-          <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
-          <End Role="SolutionsQueue" Type="Self.SolutionsQueue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Problem">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="SolutionsQueue">
-              <PropertyRef Name="problem_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TestRuns__proble__5DCAEF64">
-          <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
+        <Association Name="FK__TestRuns__proble__6E01572D">
+          <End Role="Problem" Type="Self.Problem" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TestRuns" Type="Self.TestRun" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Problem">
@@ -494,18 +435,6 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__code___4BAC3F29">
-          <End Role="ProgrammingLanguages" Type="Self.ProgrammingLanguage" Multiplicity="0..1" />
-          <End Role="SolutionsQueue" Type="Self.SolutionsQueue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProgrammingLanguages">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="SolutionsQueue">
-              <PropertyRef Name="code_language" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -519,7 +448,6 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
           <EntitySet Name="ProgrammingLanguages" EntityType="Self.ProgrammingLanguage" />
           <EntitySet Name="Solutions" EntityType="Self.Solution" />
           <EntitySet Name="TestRuns" EntityType="Self.TestRun" />
-          <EntitySet Name="SolutionsQueues" EntityType="Self.SolutionsQueue" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -528,25 +456,21 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK__Solutions__solve__01142BA1" Association="Self.FK__Solutions__solve__01142BA1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Solutions" EntitySet="Solutions" />
+          </AssociationSet>
           <AssociationSet Name="FK__Solutions__probl__440B1D61" Association="Self.FK__Solutions__probl__440B1D61">
             <End Role="Problem" EntitySet="Problems" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Solutions__probl__4AB81AF0" Association="Self.FK__Solutions__probl__4AB81AF0">
-            <End Role="Problem" EntitySet="Problems" />
-            <End Role="SolutionsQueue" EntitySet="SolutionsQueues" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TestRuns__proble__5DCAEF64" Association="Self.FK__TestRuns__proble__5DCAEF64">
+          <AssociationSet Name="FK__TestRuns__proble__6E01572D" Association="Self.FK__TestRuns__proble__6E01572D">
             <End Role="Problem" EntitySet="Problems" />
             <End Role="TestRuns" EntitySet="TestRuns" />
           </AssociationSet>
           <AssociationSet Name="FK__Solutions__code___44FF419A" Association="Self.FK__Solutions__code___44FF419A">
             <End Role="ProgrammingLanguages" EntitySet="ProgrammingLanguages" />
             <End Role="Solutions" EntitySet="Solutions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Solutions__code___4BAC3F29" Association="Self.FK__Solutions__code___4BAC3F29">
-            <End Role="ProgrammingLanguages" EntitySet="ProgrammingLanguages" />
-            <End Role="SolutionsQueue" EntitySet="SolutionsQueues" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -558,9 +482,9 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DbModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="DbModel.AspNetRole">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -568,7 +492,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="DbModel.AspNetUserClaim">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -578,7 +502,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="DbModel.AspNetUserLogin">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -587,7 +511,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="DbModel.AspNetUser">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -605,7 +529,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Problems">
-            <EntityTypeMapping TypeName="DbModel.Problem">
+            <EntityTypeMapping TypeName="DatabaseModel.Problem">
               <MappingFragment StoreEntitySet="Problem">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="code" ColumnName="code" />
@@ -619,7 +543,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProgrammingLanguages">
-            <EntityTypeMapping TypeName="DbModel.ProgrammingLanguage">
+            <EntityTypeMapping TypeName="DatabaseModel.ProgrammingLanguage">
               <MappingFragment StoreEntitySet="ProgrammingLanguages">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="language_name" ColumnName="language_name" />
@@ -627,7 +551,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Solutions">
-            <EntityTypeMapping TypeName="DbModel.Solution">
+            <EntityTypeMapping TypeName="DatabaseModel.Solution">
               <MappingFragment StoreEntitySet="Solutions">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="problem_id" ColumnName="problem_id" />
@@ -643,7 +567,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestRuns">
-            <EntityTypeMapping TypeName="DbModel.TestRun">
+            <EntityTypeMapping TypeName="DatabaseModel.TestRun">
               <MappingFragment StoreEntitySet="TestRuns">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="problem_id" ColumnName="problem_id" />
@@ -653,20 +577,7 @@ warning 6002: The table/view 'aspnet-Competition Programs Checker-20200515040733
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SolutionsQueues">
-            <EntityTypeMapping TypeName="DbModel.SolutionsQueue">
-              <MappingFragment StoreEntitySet="SolutionsQueue">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="problem_id" ColumnName="problem_id" />
-                <ScalarProperty Name="solver_id" ColumnName="solver_id" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="code_language" ColumnName="code_language" />
-                <ScalarProperty Name="submitted_time" ColumnName="submitted_time" />
-                <ScalarProperty Name="time_offset" ColumnName="time_offset" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DatabaseModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>

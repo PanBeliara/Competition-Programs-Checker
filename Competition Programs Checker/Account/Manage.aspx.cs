@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using Competition_Programs_Checker.Models;
+using System.Web.UI.WebControls;
 
 namespace Competition_Programs_Checker.Account
 {
@@ -77,7 +78,10 @@ namespace Competition_Programs_Checker.Account
                         : String.Empty;
                     successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
                 }
+
+                PopulateTable();
             }
+
         }
 
 
@@ -123,6 +127,71 @@ namespace Competition_Programs_Checker.Account
             manager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
 
             Response.Redirect("/Account/Manage");
+        }
+
+        private void PopulateTable()
+        {
+            List<SolutionViewModel> allSolutions = null;
+
+            string userid = User.Identity.GetUserId();
+
+            using (DatabaseEntities dc = new DatabaseEntities())
+            {
+                var solutions = (from a in dc.Solutions where a.solver_id == userid
+                                 select new
+                                 {
+                                     a
+                                 }
+                                 );
+
+                if (solutions != null)
+                {
+                    allSolutions = new List<SolutionViewModel>();
+                    foreach (var x in solutions)
+                    {
+                        SolutionViewModel u = new SolutionViewModel();
+
+                        u.problemName = x.a.Problem.code;
+                        u.userName = x.a.AspNetUser.UserName;
+                        u.code = x.a.code;
+                        u.codeLanguage = x.a.ProgrammingLanguage.language_name;
+                        u.submittedTime = x.a.submitted_time.ToString();
+                        u.execTime = x.a.time_offset;
+                        u.is_error = x.a.is_error.ToString();
+                        u.score = x.a.score;
+
+                        allSolutions.Add(u);
+                    }
+                }
+
+                if (allSolutions == null || allSolutions.Count == 0)
+                {
+                    allSolutions.Add(new SolutionViewModel());
+                    mySolutions.DataSource = allSolutions;
+                    mySolutions.DataBind();
+                    mySolutions.Rows[0].Visible = false;
+                }
+                else
+                {
+                    mySolutions.DataSource = allSolutions;
+                    mySolutions.DataBind();
+                }
+                renameColumns();
+            }
+        }
+
+        private void renameColumns()
+        {
+            GridViewRow header = mySolutions.HeaderRow;
+
+            header.Cells[0].Text = "Zadanie";
+            header.Cells[1].Text = "Rozwiązujący";
+            header.Cells[2].Text = "Kod";
+            header.Cells[3].Text = "Język Programowania";
+            header.Cells[4].Text = "Czas złożenia";
+            header.Cells[5].Text = "Czas wykonania programu w sekundach";
+            header.Cells[6].Text = "Błąd podczas wykonywania/kompilacji programu";
+            header.Cells[7].Text = "Wynik w %";
         }
     }
 }

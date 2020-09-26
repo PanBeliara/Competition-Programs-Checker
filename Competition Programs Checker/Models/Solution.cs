@@ -21,10 +21,11 @@ namespace Competition_Programs_Checker.Models
         public Nullable<int> code_language { get; set; }
         public System.DateTime submitted_time { get; set; }
         public System.DateTime checked_time { get; set; }
-        public System.DateTimeOffset time_offset { get; set; }
+        public string time_offset { get; set; }
         public Nullable<bool> is_error { get; set; }
         public string score { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Problem Problem { get; set; }
         public virtual ProgrammingLanguage ProgrammingLanguage { get; set; }
     }

@@ -200,7 +200,6 @@
     <Content Include="Instructions.aspx" />
     <Content Include="Admin\CRUD\Problem_CRUD.aspx" />
     <Content Include="Admin\CRUD\ProgrammingLanguages_CRUD.aspx" />
-    <Content Include="Admin\CRUD\SolutionsQueue_CRUD.aspx" />
     <Content Include="Admin\CRUD\Solutions_CRUD.aspx" />
     <Content Include="Admin\CRUD\TestRuns_CRUD.aspx" />
     <Content Include="App_Data\aspnet-Competition Programs Checker-20200515040733.mdf" />
@@ -879,6 +878,7 @@
     <Content Include="Teacher\Edit_Assignment.aspx" />
     <Content Include="Teacher\Teacher_Page.aspx" />
     <Content Include="Teacher\View_Assignment.aspx" />
+    <Content Include="Teacher\View_Solutions.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -1042,13 +1042,6 @@
     <Compile Include="Admin\CRUD\ProgrammingLanguages_CRUD.aspx.designer.cs">
       <DependentUpon>ProgrammingLanguages_CRUD.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\CRUD\SolutionsQueue_CRUD.aspx.cs">
-      <DependentUpon>SolutionsQueue_CRUD.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\CRUD\SolutionsQueue_CRUD.aspx.designer.cs">
-      <DependentUpon>SolutionsQueue_CRUD.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\CRUD\Solutions_CRUD.aspx.cs">
       <DependentUpon>Solutions_CRUD.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1115,9 +1108,7 @@
     <Compile Include="Models\Solution.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SolutionsQueue.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\SolutionViewModel.cs" />
     <Compile Include="Models\TestRun.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -1158,6 +1149,13 @@
     </Compile>
     <Compile Include="Teacher\View_Assignment.aspx.designer.cs">
       <DependentUpon>View_Assignment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher\View_Solutions.aspx.cs">
+      <DependentUpon>View_Solutions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Teacher\View_Solutions.aspx.designer.cs">
+      <DependentUpon>View_Solutions.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

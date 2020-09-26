@@ -33,6 +33,5 @@ namespace Competition_Programs_Checker.Models
         public virtual DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
         public virtual DbSet<Solution> Solutions { get; set; }
         public virtual DbSet<TestRun> TestRuns { get; set; }
-        public virtual DbSet<SolutionsQueue> SolutionsQueues { get; set; }
     }
 }

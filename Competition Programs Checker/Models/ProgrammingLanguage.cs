@@ -18,7 +18,6 @@ namespace Competition_Programs_Checker.Models
         public ProgrammingLanguage()
         {
             this.Solutions = new HashSet<Solution>();
-            this.SolutionsQueues = new HashSet<SolutionsQueue>();
         }
     
         public int id { get; set; }
@@ -26,7 +25,5 @@ namespace Competition_Programs_Checker.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Solution> Solutions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SolutionsQueue> SolutionsQueues { get; set; }
     }
 }

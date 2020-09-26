@@ -80,6 +80,7 @@ namespace Competition_Programs_Checker.Admin.CRUD
                             output = txtOutputFile.Text.Trim()
                         });
 
+                        dc.SaveChanges();
                         PopulateTable();
                     }
                 }
