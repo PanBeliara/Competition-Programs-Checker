@@ -10,7 +10,6 @@ namespace Competition_Programs_Checker
     public partial class Startup {
         public void Configuration(IAppBuilder app) {
             ConfigureAuth(app);
-            createRolesandUsers();
         }
 
         private void createRolesandUsers()

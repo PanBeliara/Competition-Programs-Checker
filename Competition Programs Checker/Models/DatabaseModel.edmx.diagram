@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b431a942660748a498ba07727eccae0e" Name="Diagram1">
+      <Diagram DiagramId="63742b5eb04d4102b84cfdec57467eca" Name="Diagram1">
         <EntityTypeShape EntityType="DatabaseModel.AspNetRole" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
@@ -15,10 +15,10 @@
         <EntityTypeShape EntityType="DatabaseModel.TestRun" Width="1.5" PointX="8.25" PointY="2.125" IsExpanded="true" />
         <AssociationConnector Association="DatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="DatabaseModel.FK__Solutions__solve__01142BA1" ManuallyRouted="false" />
-        <AssociationConnector Association="DatabaseModel.FK__Solutions__probl__440B1D61" ManuallyRouted="false" />
-        <AssociationConnector Association="DatabaseModel.FK__TestRuns__proble__6E01572D" ManuallyRouted="false" />
-        <AssociationConnector Association="DatabaseModel.FK__Solutions__code___44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Solutions__solve__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Solutions__probl__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__TestRuns__proble__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Solutions__code___7E37BEF6" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

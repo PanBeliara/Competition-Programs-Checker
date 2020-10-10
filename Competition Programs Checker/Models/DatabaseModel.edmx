@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -101,7 +101,7 @@
           <Property Name="input" Type="nvarchar(max)" Nullable="false" />
           <Property Name="output" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Solutions__code___44FF419A">
+        <Association Name="FK__Solutions__code___7E37BEF6">
           <End Role="ProgrammingLanguages" Type="Self.ProgrammingLanguages" Multiplicity="0..1" />
           <End Role="Solutions" Type="Self.Solutions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -113,7 +113,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__probl__440B1D61">
+        <Association Name="FK__Solutions__probl__7D439ABD">
           <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
           <End Role="Solutions" Type="Self.Solutions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -125,7 +125,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__solve__01142BA1">
+        <Association Name="FK__Solutions__solve__7C4F7684">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Solutions" Type="Self.Solutions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -137,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TestRuns__proble__6E01572D">
+        <Association Name="FK__TestRuns__proble__7F2BE32F">
           <End Role="Problem" Type="Self.Problem" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -217,19 +217,19 @@
           <EntitySet Name="ProgrammingLanguages" EntityType="Self.ProgrammingLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solutions" EntityType="Self.Solutions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestRuns" EntityType="Self.TestRuns" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Solutions__code___44FF419A" Association="Self.FK__Solutions__code___44FF419A">
+          <AssociationSet Name="FK__Solutions__code___7E37BEF6" Association="Self.FK__Solutions__code___7E37BEF6">
             <End Role="ProgrammingLanguages" EntitySet="ProgrammingLanguages" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Solutions__probl__440B1D61" Association="Self.FK__Solutions__probl__440B1D61">
+          <AssociationSet Name="FK__Solutions__probl__7D439ABD" Association="Self.FK__Solutions__probl__7D439ABD">
             <End Role="Problem" EntitySet="Problem" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Solutions__solve__01142BA1" Association="Self.FK__Solutions__solve__01142BA1">
+          <AssociationSet Name="FK__Solutions__solve__7C4F7684" Association="Self.FK__Solutions__solve__7C4F7684">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__TestRuns__proble__6E01572D" Association="Self.FK__TestRuns__proble__6E01572D">
+          <AssociationSet Name="FK__TestRuns__proble__7F2BE32F" Association="Self.FK__TestRuns__proble__7F2BE32F">
             <End Role="Problem" EntitySet="Problem" />
             <End Role="TestRuns" EntitySet="TestRuns" />
           </AssociationSet>
@@ -302,7 +302,7 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__solve__01142BA1" FromRole="AspNetUsers" ToRole="Solutions" />
+          <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__solve__7C4F7684" FromRole="AspNetUsers" ToRole="Solutions" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Problem">
@@ -317,8 +317,8 @@
           <Property Name="is_active" Type="Boolean" Nullable="false" />
           <Property Name="best_scores_cache" Type="String" MaxLength="3300" FixedLength="false" Unicode="true" />
           <Property Name="worst_best_score" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__probl__440B1D61" FromRole="Problem" ToRole="Solutions" />
-          <NavigationProperty Name="TestRuns" Relationship="Self.FK__TestRuns__proble__6E01572D" FromRole="Problem" ToRole="TestRuns" />
+          <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__probl__7D439ABD" FromRole="Problem" ToRole="Solutions" />
+          <NavigationProperty Name="TestRuns" Relationship="Self.FK__TestRuns__proble__7F2BE32F" FromRole="Problem" ToRole="TestRuns" />
         </EntityType>
         <EntityType Name="ProgrammingLanguage">
           <Key>
@@ -326,7 +326,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="language_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__code___44FF419A" FromRole="ProgrammingLanguages" ToRole="Solutions" />
+          <NavigationProperty Name="Solutions" Relationship="Self.FK__Solutions__code___7E37BEF6" FromRole="ProgrammingLanguages" ToRole="Solutions" />
         </EntityType>
         <EntityType Name="Solution">
           <Key>
@@ -342,9 +342,9 @@
           <Property Name="time_offset" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="is_error" Type="Boolean" />
           <Property Name="score" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Solutions__solve__01142BA1" FromRole="Solutions" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Problem" Relationship="Self.FK__Solutions__probl__440B1D61" FromRole="Solutions" ToRole="Problem" />
-          <NavigationProperty Name="ProgrammingLanguage" Relationship="Self.FK__Solutions__code___44FF419A" FromRole="Solutions" ToRole="ProgrammingLanguages" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Solutions__solve__7C4F7684" FromRole="Solutions" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Problem" Relationship="Self.FK__Solutions__probl__7D439ABD" FromRole="Solutions" ToRole="Problem" />
+          <NavigationProperty Name="ProgrammingLanguage" Relationship="Self.FK__Solutions__code___7E37BEF6" FromRole="Solutions" ToRole="ProgrammingLanguages" />
         </EntityType>
         <EntityType Name="TestRun">
           <Key>
@@ -355,7 +355,7 @@
           <Property Name="order_position" Type="Int32" Nullable="false" />
           <Property Name="input" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="output" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Problem" Relationship="Self.FK__TestRuns__proble__6E01572D" FromRole="TestRuns" ToRole="Problem" />
+          <NavigationProperty Name="Problem" Relationship="Self.FK__TestRuns__proble__7F2BE32F" FromRole="TestRuns" ToRole="Problem" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -385,7 +385,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__solve__01142BA1">
+        <Association Name="FK__Solutions__solve__7C4F7684">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
           <End Role="Solutions" Type="Self.Solution" Multiplicity="*" />
           <ReferentialConstraint>
@@ -397,7 +397,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__probl__440B1D61">
+        <Association Name="FK__Solutions__probl__7D439ABD">
           <End Role="Problem" Type="Self.Problem" Multiplicity="0..1" />
           <End Role="Solutions" Type="Self.Solution" Multiplicity="*" />
           <ReferentialConstraint>
@@ -409,7 +409,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TestRuns__proble__6E01572D">
+        <Association Name="FK__TestRuns__proble__7F2BE32F">
           <End Role="Problem" Type="Self.Problem" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -423,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Solutions__code___44FF419A">
+        <Association Name="FK__Solutions__code___7E37BEF6">
           <End Role="ProgrammingLanguages" Type="Self.ProgrammingLanguage" Multiplicity="0..1" />
           <End Role="Solutions" Type="Self.Solution" Multiplicity="*" />
           <ReferentialConstraint>
@@ -456,19 +456,19 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK__Solutions__solve__01142BA1" Association="Self.FK__Solutions__solve__01142BA1">
+          <AssociationSet Name="FK__Solutions__solve__7C4F7684" Association="Self.FK__Solutions__solve__7C4F7684">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Solutions__probl__440B1D61" Association="Self.FK__Solutions__probl__440B1D61">
+          <AssociationSet Name="FK__Solutions__probl__7D439ABD" Association="Self.FK__Solutions__probl__7D439ABD">
             <End Role="Problem" EntitySet="Problems" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
-          <AssociationSet Name="FK__TestRuns__proble__6E01572D" Association="Self.FK__TestRuns__proble__6E01572D">
+          <AssociationSet Name="FK__TestRuns__proble__7F2BE32F" Association="Self.FK__TestRuns__proble__7F2BE32F">
             <End Role="Problem" EntitySet="Problems" />
             <End Role="TestRuns" EntitySet="TestRuns" />
           </AssociationSet>
-          <AssociationSet Name="FK__Solutions__code___44FF419A" Association="Self.FK__Solutions__code___44FF419A">
+          <AssociationSet Name="FK__Solutions__code___7E37BEF6" Association="Self.FK__Solutions__code___7E37BEF6">
             <End Role="ProgrammingLanguages" EntitySet="ProgrammingLanguages" />
             <End Role="Solutions" EntitySet="Solutions" />
           </AssociationSet>
