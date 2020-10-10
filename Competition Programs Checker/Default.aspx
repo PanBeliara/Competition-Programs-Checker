@@ -52,6 +52,7 @@
                 <div class="col">
                     Wyślij wynik do bazy danych: 
                     <asp:CheckBox ID="uploadCheckBox" runat="server" />
+                    &nbsp;(Opcja dostępna tylko dla zalogowanych użytkowników)
                 </div>
             </div>
         </div>

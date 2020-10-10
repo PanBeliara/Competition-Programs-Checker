@@ -117,14 +117,17 @@ namespace Competition_Programs_Checker
                         resultTextBox.Text = result;
                         break;
                 }
-
-                if (uploadCheckBox.Checked)
+                if (User.Identity.IsAuthenticated)
                 {
-                    time_after_exec = DateTime.Now;
-                    time_offset = time_after_exec - time_before_exec;
+                    if (uploadCheckBox.Checked)
+                    {
+                        time_after_exec = DateTime.Now;
+                        time_offset = time_after_exec - time_before_exec;
 
-                    uploadResults(Convert.ToInt32(TaskDropdownList.SelectedValue), codeTextBox.Text.Trim(), Convert.ToInt32(LanguageDropdownList.SelectedValue), time_before_exec, time_after_exec, time_offset.TotalSeconds.ToString(), error, ((Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100).ToString());
+                        uploadResults(Convert.ToInt32(TaskDropdownList.SelectedValue), codeTextBox.Text.Trim(), Convert.ToInt32(LanguageDropdownList.SelectedValue), time_before_exec, time_after_exec, time_offset.TotalSeconds.ToString(), error, ((Convert.ToDouble(good) / Convert.ToDouble(overall)) * 100).ToString());
+                    }
                 }
+                
 
             }
             //Program pobiera dane we/wy z textboxów

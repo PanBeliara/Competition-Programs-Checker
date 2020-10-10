@@ -30,8 +30,6 @@ namespace Competition_Programs_Checker.Logic
 
                 StreamWriter sw = new StreamWriter(HttpContext.Current.Server.MapPath("~/Logic/program.cpp"));
 
-
-
                 //Write a line of text
                 sw.WriteLine(code);
 
