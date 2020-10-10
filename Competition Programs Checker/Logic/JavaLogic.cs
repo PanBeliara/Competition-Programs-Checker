@@ -52,8 +52,16 @@ namespace Competition_Programs_Checker.Logic
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.UseShellExecute = false;
                 process.Start();
+
+                string compileError = process.StandardError.ReadToEnd().Trim();
+
                 process.WaitForExit();
                 process.Close();
+
+                if (!compileError.Equals(""))
+                {
+                    return Tuple.Create(2, compileError);
+                }
 
                 process.StartInfo.FileName = "cmd.exe";
                 //Wskazanie pliku .class
